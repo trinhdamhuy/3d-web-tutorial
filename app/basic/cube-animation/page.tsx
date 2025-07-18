@@ -47,7 +47,12 @@ function AnimatedCube() {
   );
 }
 
-const animatedCubeCode = `function AnimatedCube() {
+const animatedCubeCode = `import { useRef, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, Box } from "@react-three/drei";
+import { Mesh } from "three";
+
+function AnimatedCube() {
   const meshRef = useRef<Mesh>(null);
   const [hovered, setHovered] = useState(false);
 
@@ -83,16 +88,21 @@ function Scene() {
     <>
       {/* Ambient Light - environmental lighting */}
       <ambientLight intensity={0.4} />
-
       {/* Point Light - point source lighting */}
       <pointLight position={[10, 10, 10]} />
-
       {/* Animated Cube */}
       <AnimatedCube />
-
       {/* OrbitControls for camera rotation */}
       <OrbitControls />
     </>
+  );
+}
+
+export default function CubeAnimation() {
+  return (
+    <Canvas camera={{ position: [3, 3, 3] }}>
+      <Scene />
+    </Canvas>
   );
 }`;
 

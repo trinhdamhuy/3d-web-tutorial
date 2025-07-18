@@ -44,28 +44,29 @@ function Model() {
   );
 }
 
-const modelCode = `// Component to load GLB model
+const modelCode = `import { Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Environment, ContactShadows } from "@react-three/drei";
+
 function Model() {
-  // Using model from public/models/ (if available) or create a complex scene
   return (
     <group>
-      {/* Create a complex scene instead of loading GLB */}
+      {/* Box */}
       <mesh position={[0, 0, 0]} castShadow receiveShadow>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial color="#3b82f6" metalness={0.8} roughness={0.2} />
       </mesh>
-
+      {/* Sphere */}
       <mesh position={[2, 0, 0]} castShadow receiveShadow>
         <sphereGeometry args={[0.5, 32, 32]} />
         <meshStandardMaterial color="#ef4444" metalness={0.6} roughness={0.3} />
       </mesh>
-
+      {/* Cylinder */}
       <mesh position={[-2, 0, 0]} castShadow receiveShadow>
         <cylinderGeometry args={[0.5, 0.5, 1, 32]} />
         <meshStandardMaterial color="#10b981" metalness={0.7} roughness={0.2} />
       </mesh>
-
-      {/* Ground plane with shadow */}
+      {/* Ground plane */}
       <mesh position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[10, 10]} />
         <meshStandardMaterial color="#374151" />
@@ -79,7 +80,6 @@ function Scene() {
     <>
       {/* Environment lighting */}
       <Environment preset="sunset" />
-
       {/* Directional light with shadow */}
       <directionalLight
         position={[5, 5, 5]}
@@ -93,19 +93,15 @@ function Scene() {
         shadow-camera-top={10}
         shadow-camera-bottom={-10}
       />
-
       {/* Ambient light */}
       <ambientLight intensity={0.3} />
-
       {/* Point lights */}
       <pointLight position={[-5, 5, 5]} intensity={0.5} color="#ff6b6b" />
       <pointLight position={[5, 5, -5]} intensity={0.5} color="#4ecdc4" />
-
       {/* Model */}
       <Suspense fallback={null}>
         <Model />
       </Suspense>
-
       {/* Contact shadows */}
       <ContactShadows
         position={[0, -1.99, 0]}
@@ -116,7 +112,6 @@ function Scene() {
         resolution={256}
         color="#000000"
       />
-
       {/* OrbitControls */}
       <OrbitControls
         enablePan={true}
@@ -125,6 +120,14 @@ function Scene() {
         maxPolarAngle={Math.PI / 2}
       />
     </>
+  );
+}
+
+export default function LoadModel() {
+  return (
+    <Canvas camera={{ position: [5, 5, 5] }} shadows gl={{ antialias: true, toneMapping: 2, outputColorSpace: "srgb" }}>
+      <Scene />
+    </Canvas>
   );
 }`;
 

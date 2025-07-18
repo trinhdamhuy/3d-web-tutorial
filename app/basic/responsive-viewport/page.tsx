@@ -45,29 +45,25 @@ function ResponsiveCamera() {
   return null;
 }
 
-const responsiveCameraCode = `// Component to adjust camera based on screen size
+const responsiveCameraCode = `import { useEffect } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
+import { OrbitControls, Box, Sphere, Cylinder } from "@react-three/drei";
+
 function ResponsiveCamera() {
   const { camera, size } = useThree();
-
   useEffect(() => {
-    // Adjust camera based on viewport size
     if (size.width < 768) {
-      // Mobile
       camera.position.set(4, 4, 4);
       if ("fov" in camera) camera.fov = 75;
     } else if (size.width < 1024) {
-      // Tablet
       camera.position.set(5, 5, 5);
       if ("fov" in camera) camera.fov = 60;
     } else {
-      // Desktop
       camera.position.set(6, 6, 6);
       if ("fov" in camera) camera.fov = 50;
     }
-
     camera.updateProjectionMatrix();
   }, [camera, size.width, size.height]);
-
   return null;
 }
 
@@ -76,34 +72,26 @@ function Scene() {
     <>
       {/* Ambient Light */}
       <ambientLight intensity={0.4} />
-
       {/* Point Light */}
       <pointLight position={[10, 10, 10]} intensity={1} />
-
       {/* Objects */}
       <Box args={[1, 1, 1]} position={[0, 0, 0]}>
         <meshStandardMaterial color="#ef4444" />
       </Box>
-
       <Sphere args={[0.5, 32, 32]} position={[2, 0, 0]}>
         <meshStandardMaterial color="#3b82f6" />
       </Sphere>
-
       <Cylinder args={[0.5, 0.5, 1, 32]} position={[-2, 0, 0]}>
         <meshStandardMaterial color="#10b981" />
       </Cylinder>
-
       <Box args={[0.5, 0.5, 0.5]} position={[0, 2, 0]}>
         <meshStandardMaterial color="#f59e0b" />
       </Box>
-
       <Sphere args={[0.3, 16, 16]} position={[0, -2, 0]}>
         <meshStandardMaterial color="#8b5cf6" />
       </Sphere>
-
       {/* Responsive Camera */}
       <ResponsiveCamera />
-
       {/* OrbitControls */}
       <OrbitControls
         enablePan={true}
@@ -113,6 +101,14 @@ function Scene() {
         minDistance={2}
       />
     </>
+  );
+}
+
+export default function ResponsiveViewport() {
+  return (
+    <Canvas>
+      <Scene />
+    </Canvas>
   );
 }`;
 

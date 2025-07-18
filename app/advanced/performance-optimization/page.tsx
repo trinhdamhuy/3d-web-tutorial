@@ -10,13 +10,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Zap } from "lucide-react";
+import { Eye, EyeOff, Zap } from "lucide-react";
 import { CodeDisplay } from "@/app/_components/code-display";
 import { FeatureListCard } from "@/app/_components/feature-list-card";
+import { Button } from "@/components/ui/button";
 
 const perfOptCode = `import { useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Instances, Instance, OrbitControls } from "@react-three/drei";
+import { Button } from "@/components/ui/button";
+import { Eye, EyeOff } from "lucide-react";
 
 function Boxes() {
   return (
@@ -34,9 +37,11 @@ export default function PerformanceOptimizationScene() {
   const [show, setShow] = useState(true);
   return (
     <>
-      <button onClick={() => setShow((s) => !s)}>
-        {show ? "Hide" : "Show"} Boxes
-      </button>
+      <div className="flex justify-end">
+        <Button variant="ghost" onClick={() => setShow((s) => !s)}>
+          {show ? <Eye /> : <EyeOff />}
+        </Button>
+      </div>
       <Suspense fallback={<span>Loading...</span>}>
         {show && <Boxes />}
       </Suspense>
@@ -64,12 +69,11 @@ function PerformanceOptimizationScene() {
   const [show, setShow] = useState(true);
   return (
     <>
-      <button
-        className="mb-2 px-3 py-1 rounded bg-primary text-white"
-        onClick={() => setShow((s) => !s)}
-      >
-        {show ? "Hide" : "Show"} Boxes
-      </button>
+      <div className="flex justify-end">
+        <Button variant="ghost" onClick={() => setShow((s) => !s)}>
+          {show ? <Eye /> : <EyeOff />}
+        </Button>
+      </div>
       <div className="h-96 w-full rounded-lg overflow-hidden">
         <Canvas camera={{ position: [0, 5, 10] }}>
           <ambientLight intensity={0.5} />

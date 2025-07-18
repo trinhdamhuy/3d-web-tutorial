@@ -73,15 +73,16 @@ function Scene() {
   );
 }
 
-const multiObjectCode = `function Scene() {
+const multiObjectCode = `import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Box, Sphere, Cylinder, Plane } from "@react-three/drei";
+
+function Scene() {
   return (
     <>
       {/* Ambient Light - environmental lighting */}
       <ambientLight intensity={0.4} />
-
       {/* Point Light - point source lighting */}
       <pointLight position={[10, 10, 10]} intensity={1} />
-
       {/* Ground Plane */}
       <Plane
         args={[10, 10]}
@@ -90,40 +91,41 @@ const multiObjectCode = `function Scene() {
       >
         <meshStandardMaterial color="#374151" />
       </Plane>
-
       {/* Box - center position */}
       <Box args={[1, 1, 1]} position={[0, 0, 0]}>
         <meshStandardMaterial color="#ef4444" />
       </Box>
-
       {/* Sphere - front */}
       <Sphere args={[0.5, 32, 32]} position={[0, 0, 2]}>
         <meshStandardMaterial color="#3b82f6" />
       </Sphere>
-
       {/* Cylinder - right */}
       <Cylinder args={[0.5, 0.5, 1, 32]} position={[2, 0, 0]}>
         <meshStandardMaterial color="#10b981" />
       </Cylinder>
-
       {/* Small Box - left */}
       <Box args={[0.5, 0.5, 0.5]} position={[-2, 0, 0]}>
         <meshStandardMaterial color="#f59e0b" />
       </Box>
-
       {/* Small Sphere - back */}
       <Sphere args={[0.3, 16, 16]} position={[0, 0, -2]}>
         <meshStandardMaterial color="#8b5cf6" />
       </Sphere>
-
       {/* Small Cylinder - top */}
       <Cylinder args={[0.2, 0.2, 0.8, 16]} position={[0, 2, 0]}>
         <meshStandardMaterial color="#ec4899" />
       </Cylinder>
-
       {/* OrbitControls for camera rotation */}
       <OrbitControls />
     </>
+  );
+}
+
+export default function MultiObject() {
+  return (
+    <Canvas camera={{ position: [5, 5, 5] }}>
+      <Scene />
+    </Canvas>
   );
 }`;
 

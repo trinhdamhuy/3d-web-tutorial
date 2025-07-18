@@ -33,11 +33,14 @@ function Scene() {
   );
 }
 
-const sceneCode = `function Scene() {
+const sceneCode = `import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Box } from "@react-three/drei";
+
+function Scene() {
   return (
     <>
       {/* Ambient Light - environmental lighting */}
-      <ambientLight intensity={0.4} />
+      <ambientLight intensity={0.6} />
 
       {/* Point Light - point source lighting */}
       <pointLight position={[10, 10, 10]} intensity={1} />
@@ -50,6 +53,14 @@ const sceneCode = `function Scene() {
       {/* OrbitControls for camera rotation */}
       <OrbitControls />
     </>
+  );
+}
+
+export default function HelloCube() {
+  return (
+    <Canvas camera={{ position: [3, 3, 3] }}>
+      <Scene />
+    </Canvas>
   );
 }`;
 
