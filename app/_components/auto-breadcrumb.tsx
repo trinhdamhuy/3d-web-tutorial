@@ -49,25 +49,23 @@ export function AutoBreadcrumb() {
   ];
 
   return (
-    <div className="py-2">
-      <Breadcrumb>
-        <BreadcrumbList>
-          {breadcrumbItems.map((item, index) => (
-            <React.Fragment key={index}>
-              <BreadcrumbItem>
-                {item.href ? (
-                  <BreadcrumbLink asChild>
-                    <Link href={item.href}>{item.label}</Link>
-                  </BreadcrumbLink>
-                ) : (
-                  <BreadcrumbPage>{item.label}</BreadcrumbPage>
-                )}
-              </BreadcrumbItem>
-              {index < breadcrumbItems.length - 1 && <BreadcrumbSeparator />}
-            </React.Fragment>
-          ))}
-        </BreadcrumbList>
-      </Breadcrumb>
-    </div>
+    <Breadcrumb>
+      <BreadcrumbList>
+        {breadcrumbItems.map((item, index) => (
+          <React.Fragment key={index}>
+            <BreadcrumbItem>
+              {item.href ? (
+                <BreadcrumbLink asChild>
+                  <Link href={item.href}>{item.label}</Link>
+                </BreadcrumbLink>
+              ) : (
+                <BreadcrumbPage>{item.label}</BreadcrumbPage>
+              )}
+            </BreadcrumbItem>
+            {index < breadcrumbItems.length - 1 && <BreadcrumbSeparator />}
+          </React.Fragment>
+        ))}
+      </BreadcrumbList>
+    </Breadcrumb>
   );
 }

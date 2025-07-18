@@ -38,14 +38,12 @@ export default function RootLayout({
           <Header />
 
           {/* Auto Breadcrumb */}
-          <div className="max-w-6xl mx-auto px-4">
+          <div className="max-w-6xl mx-auto px-4 py-2">
             <AutoBreadcrumb />
           </div>
 
           {/* Main Content */}
-          <main className="min-h-screen bg-gradient-to-br from-background to-muted">
-            {children}
-          </main>
+          <main className="min-h-screen">{children}</main>
         </ThemeProvider>
       </body>
     </html>

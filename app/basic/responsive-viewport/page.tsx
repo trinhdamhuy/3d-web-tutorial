@@ -16,7 +16,7 @@ import {
   Tablet,
   TabletSmartphone as Responsive,
 } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // Component to adjust camera based on screen size
 function ResponsiveCamera() {
@@ -46,17 +46,34 @@ function ResponsiveCamera() {
 
 // Component to display viewport information
 function ViewportInfo() {
-  const { size, viewport } = useThree();
+  const [viewportInfo, setViewportInfo] = useState({
+    screenWidth: 0,
+    screenHeight: 0,
+    pixelRatio: 0,
+  });
+
+  useEffect(() => {
+    const updateViewportInfo = () => {
+      setViewportInfo({
+        screenWidth: window.innerWidth,
+        screenHeight: window.innerHeight,
+        pixelRatio: window.devicePixelRatio,
+      });
+    };
+
+    updateViewportInfo();
+    window.addEventListener("resize", updateViewportInfo);
+
+    return () => window.removeEventListener("resize", updateViewportInfo);
+  }, []);
 
   return (
     <div className="absolute top-4 left-4 bg-background/80 text-foreground p-2 rounded text-xs border">
       <div>
-        Screen: {size.width} x {size.height}
+        Screen: {viewportInfo.screenWidth} x {viewportInfo.screenHeight}
       </div>
-      <div>
-        Viewport: {viewport.width.toFixed(1)} x {viewport.height.toFixed(1)}
-      </div>
-      <div>Pixel Ratio: {window.devicePixelRatio.toFixed(2)}</div>
+      <div>Canvas: 100% x 100%</div>
+      <div>Pixel Ratio: {viewportInfo.pixelRatio.toFixed(2)}</div>
     </div>
   );
 }
@@ -136,8 +153,8 @@ export default function ResponsiveViewport() {
                 <div className="h-96 w-full rounded-lg overflow-hidden relative">
                   <Canvas>
                     <Scene />
-                    <ViewportInfo />
                   </Canvas>
+                  <ViewportInfo />
                 </div>
               </CardContent>
             </Card>
