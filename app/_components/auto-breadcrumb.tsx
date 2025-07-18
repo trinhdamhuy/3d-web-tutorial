@@ -20,6 +20,13 @@ const pathNameMap: Record<string, string> = {
   "multi-object": "Multi Object Scene",
   "load-model": "Load Model GLB",
   "responsive-viewport": "Responsive Viewport",
+  // Intermediate section
+  intermediate: "Intermediate Level",
+  "ground-shadows": "Ground & Shadows",
+  "mouse-interaction": "Advanced Mouse Interaction",
+  "floating-ui": "Floating 2D UI in 3D",
+  "camera-animation": "Smooth Camera Animation",
+  "multi-models": "Load Multiple Models",
 };
 
 export function AutoBreadcrumb() {

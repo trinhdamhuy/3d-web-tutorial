@@ -25,8 +25,12 @@ const BasicLessonOrder = [
   },
 ];
 
-const AdvancedLessonOrder = [
-  { id: "hello-cube", path: "/advanced/hello-cube", title: "Hello Cube" },
+const IntermediateLessonOrder = [
+  { id: "ground-shadows", path: "/intermediate/ground-shadows", title: "Ground & Shadows" },
+  { id: "mouse-interaction", path: "/intermediate/mouse-interaction", title: "Advanced Mouse Interaction" },
+  { id: "floating-ui", path: "/intermediate/floating-ui", title: "Floating 2D UI in 3D" },
+  { id: "camera-animation", path: "/intermediate/camera-animation", title: "Smooth Camera Animation" },
+  { id: "multi-models", path: "/intermediate/multi-models", title: "Load Multiple Models" },
 ];
 
 interface NextLessonProps {
@@ -38,7 +42,7 @@ export function NextLesson({ currentLessonId, scope }: NextLessonProps) {
   // Find the current lesson index
 
   const lessonOrder =
-    scope === "basic" ? BasicLessonOrder : AdvancedLessonOrder;
+    scope === "basic" ? BasicLessonOrder : IntermediateLessonOrder;
 
   const currentIndex = lessonOrder.findIndex(
     (lesson) => lesson.id === currentLessonId

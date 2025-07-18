@@ -33,12 +33,12 @@ const levels = [
     lessons: 5,
   },
   {
-    title: "Medium Level",
+    title: "Intermediate Level",
     href: "#",
     description: "Advanced techniques and complex interactions",
     icon: Zap,
-    status: "coming-soon",
-    lessons: 0,
+    status: "available",
+    lessons: 5,
   },
   {
     title: "Advanced Level",
@@ -81,6 +81,34 @@ const basicLessons = [
     href: "/basic/responsive-viewport",
     description: "Automatically adjust camera based on screen size",
     icon: Responsive,
+  },
+];
+
+const intermediateLessons = [
+  {
+    title: "Ground & Shadows",
+    href: "/intermediate/ground-shadows",
+    description: "Add a ground plane and enable object shadows.",
+  },
+  {
+    title: "Advanced Mouse Interaction",
+    href: "/intermediate/mouse-interaction",
+    description: "Hover to scale, click to change color or move.",
+  },
+  {
+    title: "Floating 2D UI in 3D",
+    href: "/intermediate/floating-ui",
+    description: "Attach 2D HTML UI to 3D objects.",
+  },
+  {
+    title: "Smooth Camera Animation",
+    href: "/intermediate/camera-animation",
+    description: "Tween camera movement when selecting objects.",
+  },
+  {
+    title: "Load Multiple Models",
+    href: "/intermediate/multi-models",
+    description: "Load and display multiple models from JSON.",
   },
 ];
 
@@ -130,6 +158,24 @@ export function Header() {
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                     {basicLessons.map((lesson) => (
+                      <ListItem
+                        key={lesson.title}
+                        title={lesson.title}
+                        href={lesson.href}
+                      >
+                        {lesson.description}
+                      </ListItem>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>
+                  Intermediate Level
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                    {intermediateLessons.map((lesson) => (
                       <ListItem
                         key={lesson.title}
                         title={lesson.title}

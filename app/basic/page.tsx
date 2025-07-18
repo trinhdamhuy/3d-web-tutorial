@@ -1,13 +1,6 @@
 "use client";
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
   RotateCcw,
   Grid3X3,
   Download,
@@ -72,76 +65,42 @@ const lessons: Lesson[] = [
 
 export default function BasicPage() {
   return (
-    <div className="p-4">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-4 flex items-center gap-3">
-            <BookOpen className="w-8 h-8 text-primary" />
-            Basic Level Tutorials
-          </h1>
-          <p className="text-xl text-muted-foreground mb-6">
-            Master fundamental 3D web development concepts with React Three
-            Fiber
-          </p>
+    <div className="p-4 max-w-6xl mx-auto">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-foreground mb-4 flex items-center gap-3">
+          <BookOpen className="w-8 h-8 text-primary" />
+          Basic Level Tutorials
+        </h1>
+        <p className="text-xl text-muted-foreground mb-6">
+          Master fundamental 3D web development concepts with React Three Fiber
+        </p>
 
-          <div className="flex items-center gap-6 text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <Code className="w-5 h-5" />
-              <span>5 Lessons</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Lightbulb className="w-5 h-5" />
-              <span>Hands-on Projects</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Play className="w-5 h-5" />
-              <span>Interactive 3D Scenes</span>
-            </div>
+        <div className="flex items-center gap-6 text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <Code className="w-5 h-5" />
+            <span>5 Lessons</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Lightbulb className="w-5 h-5" />
+            <span>Hands-on Projects</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Play className="w-5 h-5" />
+            <span>Interactive 3D Scenes</span>
           </div>
         </div>
+      </div>
 
-        {/* Lessons Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {lessons.map((lesson, index) => (
-            <LessonCard
-              key={lesson.id}
-              lesson={lesson}
-              lessonNumber={index + 1}
-            />
-          ))}
-        </div>
-
-        {/* Progress Section */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Your Learning Progress</CardTitle>
-            <CardDescription className="text-muted-foreground">
-              Track your progress through the basic level tutorials
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-muted-foreground">
-                  Basic Level Completion
-                </span>
-                <span className="text-foreground font-medium">
-                  0 / 5 lessons
-                </span>
-              </div>
-              <div className="w-full bg-secondary rounded-full h-2">
-                <div
-                  className="bg-primary h-2 rounded-full"
-                  style={{ width: "0%" }}
-                ></div>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Complete all basic lessons to unlock medium level tutorials
-              </p>
-            </div>
-          </CardContent>
-        </Card>
+      {/* Lessons Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {lessons.map((lesson, index) => (
+          <LessonCard
+            key={lesson.id}
+            lesson={lesson}
+            lessonNumber={index + 1}
+          />
+        ))}
       </div>
     </div>
   );

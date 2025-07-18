@@ -35,14 +35,21 @@ const levels: LearningLevel[] = [
     path: "/basic",
   },
   {
-    id: "medium",
-    title: "Medium Level",
-    description: "Advanced techniques and complex interactions",
+    id: "intermediate",
+    title: "Intermediate Level",
+    description:
+      "Take your 3D web skills to the next level with interactive and advanced concepts",
     icon: Zap,
-    status: "coming-soon",
-    lessons: 0,
-    concepts: ["Physics", "Particles", "Post-processing", "Performance"],
-    path: "#",
+    status: "available",
+    lessons: 5,
+    concepts: [
+      "Shadows",
+      "Mouse Interaction",
+      "2D UI in 3D",
+      "Camera Animation",
+      "Dynamic Models",
+    ],
+    path: "/intermediate",
   },
   {
     id: "advanced",
@@ -132,9 +139,11 @@ export default function Home() {
                   Start Basic Level
                 </Link>
               </Button>
-              <Button className="flex-1" size="lg" variant="outline" disabled>
-                <Zap className="w-5 h-5 mr-2" />
-                Medium Level (Coming Soon)
+              <Button className="flex-1" size="lg" asChild variant="outline">
+                <Link href="/intermediate">
+                  <Zap className="w-5 h-5 mr-2" />
+                  Start Intermediate Level
+                </Link>
               </Button>
             </div>
           </CardContent>
