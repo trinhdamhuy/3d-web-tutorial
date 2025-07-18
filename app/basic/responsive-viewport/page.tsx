@@ -70,6 +70,51 @@ function ResponsiveCamera() {
   }, [camera, size.width, size.height]);
 
   return null;
+}
+
+function Scene() {
+  return (
+    <>
+      {/* Ambient Light */}
+      <ambientLight intensity={0.4} />
+
+      {/* Point Light */}
+      <pointLight position={[10, 10, 10]} intensity={1} />
+
+      {/* Objects */}
+      <Box args={[1, 1, 1]} position={[0, 0, 0]}>
+        <meshStandardMaterial color="#ef4444" />
+      </Box>
+
+      <Sphere args={[0.5, 32, 32]} position={[2, 0, 0]}>
+        <meshStandardMaterial color="#3b82f6" />
+      </Sphere>
+
+      <Cylinder args={[0.5, 0.5, 1, 32]} position={[-2, 0, 0]}>
+        <meshStandardMaterial color="#10b981" />
+      </Cylinder>
+
+      <Box args={[0.5, 0.5, 0.5]} position={[0, 2, 0]}>
+        <meshStandardMaterial color="#f59e0b" />
+      </Box>
+
+      <Sphere args={[0.3, 16, 16]} position={[0, -2, 0]}>
+        <meshStandardMaterial color="#8b5cf6" />
+      </Sphere>
+
+      {/* Responsive Camera */}
+      <ResponsiveCamera />
+
+      {/* OrbitControls */}
+      <OrbitControls
+        enablePan={true}
+        enableZoom={true}
+        enableRotate={true}
+        maxDistance={20}
+        minDistance={2}
+      />
+    </>
+  );
 }`;
 
 // Component to display viewport information

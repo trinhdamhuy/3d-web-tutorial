@@ -25,7 +25,7 @@ export function CodeDisplay({
   title = "Source Code",
   description = "View the code for this lesson",
 }: CodeDisplayProps) {
-  const [codeTheme, setCodeTheme] = useState<"light" | "dark">("light");
+  const [codeTheme, setCodeTheme] = useState<"light" | "dark">("dark");
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {

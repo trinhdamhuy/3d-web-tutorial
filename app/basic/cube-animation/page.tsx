@@ -40,7 +40,7 @@ function AnimatedCube() {
       onPointerOut={() => setHovered(false)}
     >
       <meshStandardMaterial
-        color={hovered ? "#ff6b6b" : "#4ecdc4"}
+        color={hovered ? "red" : "cyan"}
         roughness={0.3}
         metalness={0.7}
       />
@@ -71,11 +71,29 @@ const animatedCubeCode = `function AnimatedCube() {
       onPointerOut={() => setHovered(false)}
     >
       <meshStandardMaterial
-        color={hovered ? "#ff6b6b" : "#4ecdc4"}
+        color={hovered ? "red" : "cyan"}
         roughness={0.3}
         metalness={0.7}
       />
     </Box>
+  );
+}
+
+function Scene() {
+  return (
+    <>
+      {/* Ambient Light - environmental lighting */}
+      <ambientLight intensity={0.4} />
+
+      {/* Point Light - point source lighting */}
+      <pointLight position={[10, 10, 10]} />
+
+      {/* Animated Cube */}
+      <AnimatedCube />
+
+      {/* OrbitControls for camera rotation */}
+      <OrbitControls />
+    </>
   );
 }`;
 
@@ -86,7 +104,7 @@ function Scene() {
       <ambientLight intensity={0.4} />
 
       {/* Point Light - point source lighting */}
-      <pointLight position={[10, 10, 10]} intensity={1} />
+      <pointLight position={[10, 10, 10]} />
 
       {/* Animated Cube */}
       <AnimatedCube />

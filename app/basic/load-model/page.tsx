@@ -73,6 +73,60 @@ function Model() {
       </mesh>
     </group>
   );
+}
+
+function Scene() {
+  return (
+    <>
+      {/* Environment lighting */}
+      <Environment preset="sunset" />
+
+      {/* Directional light with shadow */}
+      <directionalLight
+        position={[5, 5, 5]}
+        intensity={1}
+        castShadow
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-camera-far={50}
+        shadow-camera-left={-10}
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-10}
+      />
+
+      {/* Ambient light */}
+      <ambientLight intensity={0.3} />
+
+      {/* Point lights */}
+      <pointLight position={[-5, 5, 5]} intensity={0.5} color="#ff6b6b" />
+      <pointLight position={[5, 5, -5]} intensity={0.5} color="#4ecdc4" />
+
+      {/* Model */}
+      <Suspense fallback={null}>
+        <Model />
+      </Suspense>
+
+      {/* Contact shadows */}
+      <ContactShadows
+        position={[0, -1.99, 0]}
+        opacity={0.4}
+        scale={10}
+        blur={1}
+        far={10}
+        resolution={256}
+        color="#000000"
+      />
+
+      {/* OrbitControls */}
+      <OrbitControls
+        enablePan={true}
+        enableZoom={true}
+        enableRotate={true}
+        maxPolarAngle={Math.PI / 2}
+      />
+    </>
+  );
 }`;
 
 function Scene() {

@@ -18,14 +18,14 @@ function Scene() {
   return (
     <>
       {/* Ambient Light - environmental lighting */}
-      <ambientLight intensity={0.4} />
+      <ambientLight intensity={0.6} />
 
       {/* Point Light - point source lighting */}
       <pointLight position={[10, 10, 10]} intensity={1} />
 
       {/* Box geometry */}
       <Box args={[1, 1, 1]} position={[0, 0, 0]}>
-        <meshStandardMaterial color="orange" />
+        <meshStandardMaterial color="orange" roughness={0.3} metalness={0.7} />
       </Box>
 
       {/* OrbitControls for camera rotation */}
@@ -45,7 +45,7 @@ const sceneCode = `function Scene() {
 
       {/* Box geometry */}
       <Box args={[1, 1, 1]} position={[0, 0, 0]}>
-        <meshStandardMaterial color="orange" />
+        <meshStandardMaterial color="orange" roughness={0.3} metalness={0.7} />
       </Box>
 
       {/* OrbitControls for camera rotation */}
