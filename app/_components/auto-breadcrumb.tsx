@@ -27,6 +27,13 @@ const pathNameMap: Record<string, string> = {
   "floating-ui": "Floating 2D UI in 3D",
   "camera-animation": "Smooth Camera Animation",
   "multi-models": "Load Multiple Models",
+  // Advanced section
+  advanced: "Advanced Level",
+  "model-selector": "Model Selector + UI",
+  "model-viewer": "Model Viewer",
+  "drag-drop": "Drag & Drop Features",
+  "interior-design": "Basic Interior Design",
+  "performance-optimization": "Performance Optimization",
 };
 
 export function AutoBreadcrumb() {

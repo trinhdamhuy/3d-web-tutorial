@@ -52,7 +52,33 @@ const lessonOrders = [
       title: "Load Multiple Models",
     },
   ],
-  // Advanced lessons can be added here
+  [
+    {
+      id: "model-selector",
+      path: "/advanced/model-selector",
+      title: "Model Selector + UI",
+    },
+    {
+      id: "model-viewer",
+      path: "/advanced/model-viewer",
+      title: "Model Viewer",
+    },
+    {
+      id: "drag-drop",
+      path: "/advanced/drag-drop",
+      title: "Drag & Drop Features",
+    },
+    {
+      id: "interior-design",
+      path: "/advanced/interior-design",
+      title: "Basic Interior Design",
+    },
+    {
+      id: "performance-optimization",
+      path: "/advanced/performance-optimization",
+      title: "Performance Optimization",
+    },
+  ],
 ];
 
 function findCurrentAndNextLesson(pathname: string) {

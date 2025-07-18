@@ -112,6 +112,37 @@ const intermediateLessons = [
   },
 ];
 
+const advancedLessons = [
+  {
+    title: "Model Selector + UI",
+    href: "/advanced/model-selector",
+    description: "UI to select and load different 3D models dynamically.",
+  },
+  {
+    title: "Model Viewer",
+    href: "/advanced/model-viewer",
+    description:
+      "Interactive viewer with rotation, zoom, background, and lighting controls.",
+  },
+  {
+    title: "Drag & Drop Features",
+    href: "/advanced/drag-drop",
+    description: "Drag models in the scene using the mouse.",
+  },
+  {
+    title: "Basic Interior Design",
+    href: "/advanced/interior-design",
+    description:
+      "Add walls, floor, and furniture models. Allow rotation and movement.",
+  },
+  {
+    title: "Performance Optimization",
+    href: "/advanced/performance-optimization",
+    description:
+      "Use instances, suspense, bounds, and lazy loading for optimal performance.",
+  },
+];
+
 export function Header() {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-sm bg-background/50 shadow-xs">
@@ -176,6 +207,22 @@ export function Header() {
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                     {intermediateLessons.map((lesson) => (
+                      <ListItem
+                        key={lesson.title}
+                        title={lesson.title}
+                        href={lesson.href}
+                      >
+                        {lesson.description}
+                      </ListItem>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger>Advanced Level</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                    {advancedLessons.map((lesson) => (
                       <ListItem
                         key={lesson.title}
                         title={lesson.title}

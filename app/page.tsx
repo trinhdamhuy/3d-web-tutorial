@@ -54,12 +54,19 @@ const levels: LearningLevel[] = [
   {
     id: "advanced",
     title: "Advanced Level",
-    description: "Expert-level projects and optimization",
+    description:
+      "Master advanced 3D web development features and optimization techniques",
     icon: Star,
-    status: "coming-soon",
-    lessons: 0,
-    concepts: ["Shaders", "Custom Geometry", "VR/AR", "Optimization"],
-    path: "#",
+    status: "available",
+    lessons: 5,
+    concepts: [
+      "Model Selector",
+      "Viewer UI",
+      "Drag & Drop",
+      "Interior Design",
+      "Performance",
+    ],
+    path: "/advanced",
   },
 ];
 
@@ -143,6 +150,12 @@ export default function Home() {
                 <Link href="/intermediate">
                   <Zap className="w-5 h-5 mr-2" />
                   Start Intermediate Level
+                </Link>
+              </Button>
+              <Button className="flex-1" size="lg" asChild variant="outline">
+                <Link href="/advanced">
+                  <Star className="w-5 h-5 mr-2" />
+                  Start Advanced Level
                 </Link>
               </Button>
             </div>
