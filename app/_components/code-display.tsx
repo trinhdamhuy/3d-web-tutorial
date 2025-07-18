@@ -44,11 +44,7 @@ export function CodeDisplay({
           onClick={() => setCodeTheme(codeTheme === "light" ? "dark" : "light")}
           title={codeTheme === "light" ? "Dark code theme" : "Light code theme"}
         >
-          {codeTheme === "light" ? (
-            <Moon className="w-4 h-4" />
-          ) : (
-            <Sun className="w-4 h-4" />
-          )}
+          {codeTheme === "light" ? <Moon /> : <Sun />}
           <span className="sr-only">Toggle code theme</span>
         </Button>
         <Button
@@ -56,13 +52,8 @@ export function CodeDisplay({
           size="icon"
           onClick={handleCopy}
           title="Copy code"
-          disabled={copied}
         >
-          {copied ? (
-            <Check className="w-4 h-4 text-green-600" />
-          ) : (
-            <Copy className="w-4 h-4" />
-          )}
+          {copied ? <Check className="text-green-600" /> : <Copy />}
           <span className="sr-only">Copy code</span>
         </Button>
       </div>

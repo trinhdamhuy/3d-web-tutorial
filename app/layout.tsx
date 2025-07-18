@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "./_components/header";
 import { AutoBreadcrumb } from "./_components/auto-breadcrumb";
 import { ThemeProvider } from "@/components/theme-provider";
+import NextTopLoader from "nextjs-toploader";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -29,6 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geist.variable} ${geistMono.variable} antialiased`}>
+        <NextTopLoader />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
