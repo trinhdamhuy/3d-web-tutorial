@@ -16,11 +16,10 @@ import {
   Download,
   Play,
   BookOpen,
+  TabletSmartphone as Responsive,
+  Box as Cube,
   Code,
   Lightbulb,
-  ArrowRight,
-  TabletSmartphone,
-  Box,
 } from "lucide-react";
 
 const lessons = [
@@ -29,8 +28,7 @@ const lessons = [
     title: "Hello Cube",
     description:
       "Create a basic 3D scene with a box, lighting, and camera controls",
-    icon: Box,
-    color: "bg-blue-500/20 text-blue-300",
+    icon: Cube,
     concepts: ["Canvas", "Mesh", "Geometry", "Material", "Light", "Controls"],
     path: "/basic/hello-cube",
     duration: "10 min",
@@ -40,7 +38,6 @@ const lessons = [
     title: "Cube Animation",
     description: "Animate a cube with rotation and hover effects",
     icon: RotateCcw,
-    color: "bg-green-500/20 text-green-300",
     concepts: ["useRef", "useFrame", "useState", "Events", "Animation"],
     path: "/basic/cube-animation",
     duration: "15 min",
@@ -50,7 +47,6 @@ const lessons = [
     title: "Multi Object Scene",
     description: "Create a scene with multiple 3D objects arranged in space",
     icon: Grid3X3,
-    color: "bg-purple-500/20 text-purple-300",
     concepts: ["Position", "Rotation", "Geometry Types", "Scene Layout"],
     path: "/basic/multi-object",
     duration: "20 min",
@@ -60,7 +56,6 @@ const lessons = [
     title: "Load Model GLB",
     description: "Load 3D models, add shadows and realistic lighting",
     icon: Download,
-    color: "bg-orange-500/20 text-orange-300",
     concepts: ["useGLTF", "Environment", "Shadows", "Suspense"],
     path: "/basic/load-model",
     duration: "25 min",
@@ -69,8 +64,7 @@ const lessons = [
     id: "responsive-viewport",
     title: "Responsive Viewport",
     description: "Automatically adjust camera based on screen size",
-    icon: TabletSmartphone,
-    color: "bg-pink-500/20 text-pink-300",
+    icon: Responsive,
     concepts: ["useThree", "Responsive", "Camera", "Viewport"],
     path: "/basic/responsive-viewport",
     duration: "20 min",
@@ -83,27 +77,16 @@ export default function BasicPage() {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <Link
-              href="/"
-              className="text-slate-400 hover:text-white transition-colors"
-            >
-              Home
-            </Link>
-            <ArrowRight className="w-4 h-4 text-slate-400" />
-            <span className="text-white font-medium">Basic Level</span>
-          </div>
-
-          <h1 className="text-3xl font-bold text-white mb-4 flex items-center gap-3">
-            <BookOpen className="w-8 h-8 text-blue-400" />
+          <h1 className="text-3xl font-bold text-foreground mb-4 flex items-center gap-3">
+            <BookOpen className="w-8 h-8 text-primary" />
             Basic Level Tutorials
           </h1>
-          <p className="text-xl text-slate-300 mb-6">
+          <p className="text-xl text-muted-foreground mb-6">
             Master fundamental 3D web development concepts with React Three
             Fiber
           </p>
 
-          <div className="flex items-center gap-6 text-slate-400">
+          <div className="flex items-center gap-6 text-muted-foreground">
             <div className="flex items-center gap-2">
               <Code className="w-5 h-5" />
               <span>5 Lessons</span>
@@ -124,19 +107,19 @@ export default function BasicPage() {
           {lessons.map((lesson, index) => (
             <Card
               key={lesson.id}
-              className="bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-colors"
+              className="hover:border-primary transition-colors"
             >
               <CardHeader>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg ${lesson.color}`}>
-                      <lesson.icon className="w-6 h-6" />
+                    <div className="p-2 rounded-lg bg-primary/10">
+                      <lesson.icon className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <CardTitle className="text-white">
+                      <CardTitle className="text-foreground">
                         Lesson {index + 1}
                       </CardTitle>
-                      <CardDescription className="text-slate-400">
+                      <CardDescription className="text-muted-foreground">
                         {lesson.title}
                       </CardDescription>
                     </div>
@@ -147,10 +130,12 @@ export default function BasicPage() {
                 </div>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-slate-300 text-sm">{lesson.description}</p>
+                <p className="text-muted-foreground text-sm">
+                  {lesson.description}
+                </p>
 
                 <div className="space-y-2">
-                  <h4 className="text-sm font-medium text-white">
+                  <h4 className="text-sm font-medium text-foreground">
                     Concepts covered:
                   </h4>
                   <div className="flex flex-wrap gap-1">
@@ -166,38 +151,42 @@ export default function BasicPage() {
                   </div>
                 </div>
 
-                <Link href={lesson.path}>
-                  <Button className="w-full" variant="default">
+                <Button className="w-full" asChild>
+                  <Link href={lesson.path}>
                     <Play className="w-4 h-4 mr-2" />
                     Start Lesson
-                  </Button>
-                </Link>
+                  </Link>
+                </Button>
               </CardContent>
             </Card>
           ))}
         </div>
 
         {/* Progress Section */}
-        <Card className="bg-slate-800/50 border-slate-700">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-white">Your Learning Progress</CardTitle>
-            <CardDescription className="text-slate-300">
+            <CardTitle>Your Learning Progress</CardTitle>
+            <CardDescription className="text-muted-foreground">
               Track your progress through the basic level tutorials
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-slate-300">Basic Level Completion</span>
-                <span className="text-white font-medium">0 / 5 lessons</span>
+                <span className="text-muted-foreground">
+                  Basic Level Completion
+                </span>
+                <span className="text-foreground font-medium">
+                  0 / 5 lessons
+                </span>
               </div>
-              <div className="w-full bg-slate-700 rounded-full h-2">
+              <div className="w-full bg-secondary rounded-full h-2">
                 <div
-                  className="bg-blue-500 h-2 rounded-full"
+                  className="bg-primary h-2 rounded-full"
                   style={{ width: "0%" }}
                 ></div>
               </div>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm text-muted-foreground">
                 Complete all basic lessons to unlock medium level tutorials
               </p>
             </div>

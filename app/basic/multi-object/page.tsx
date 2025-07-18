@@ -16,9 +16,7 @@ import {
   Cylinder as CylinderIcon,
   Square,
   Grid3X3,
-  ArrowLeft,
 } from "lucide-react";
-import Link from "next/link";
 
 function Scene() {
   return (
@@ -78,31 +76,12 @@ export default function MultiObject() {
   return (
     <div className="p-4">
       <div className="max-w-6xl mx-auto">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 mb-6">
-          <Link
-            href="/"
-            className="text-slate-400 hover:text-white transition-colors"
-          >
-            Home
-          </Link>
-          <ArrowLeft className="w-4 h-4 text-slate-400 rotate-180" />
-          <Link
-            href="/basic"
-            className="text-slate-400 hover:text-white transition-colors"
-          >
-            Basic Level
-          </Link>
-          <ArrowLeft className="w-4 h-4 text-slate-400 rotate-180" />
-          <span className="text-white font-medium">Multi Object Scene</span>
-        </div>
-
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-white mb-2 flex items-center gap-2">
+          <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
             <Grid3X3 className="w-8 h-8" />
             Lesson 3: Multi Object Scene
           </h1>
-          <p className="text-slate-300">
+          <p className="text-muted-foreground">
             Create a scene with multiple 3D objects arranged in space
           </p>
         </div>
@@ -110,12 +89,12 @@ export default function MultiObject() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* 3D Scene */}
           <div className="lg:col-span-2">
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">
+                <CardTitle className="text-foreground">
                   Multi Object 3D Scene
                 </CardTitle>
-                <CardDescription className="text-slate-300">
+                <CardDescription className="text-muted-foreground">
                   Explore different 3D objects and how to arrange them in space
                 </CardDescription>
               </CardHeader>
@@ -131,121 +110,99 @@ export default function MultiObject() {
 
           {/* Concepts */}
           <div className="space-y-4">
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">3D Objects</CardTitle>
+                <CardTitle className="text-foreground">3D Objects</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <Badge
-                    variant="secondary"
-                    className="bg-red-500/20 text-red-300"
-                  >
-                    Box
-                  </Badge>
-                  <span className="text-slate-300 text-sm">Cube (0, 0, 0)</span>
+                  <Badge variant="secondary">Box</Badge>
+                  <span className="text-muted-foreground text-sm">
+                    Cube (0, 0, 0)
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge
-                    variant="secondary"
-                    className="bg-blue-500/20 text-blue-300"
-                  >
-                    Sphere
-                  </Badge>
-                  <span className="text-slate-300 text-sm">Ball (0, 0, 2)</span>
+                  <Badge variant="secondary">Sphere</Badge>
+                  <span className="text-muted-foreground text-sm">
+                    Ball (0, 0, 2)
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge
-                    variant="secondary"
-                    className="bg-green-500/20 text-green-300"
-                  >
-                    Cylinder
-                  </Badge>
-                  <span className="text-slate-300 text-sm">Tube (2, 0, 0)</span>
+                  <Badge variant="secondary">Cylinder</Badge>
+                  <span className="text-muted-foreground text-sm">
+                    Tube (2, 0, 0)
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge
-                    variant="secondary"
-                    className="bg-yellow-500/20 text-yellow-300"
-                  >
-                    Small Box
-                  </Badge>
-                  <span className="text-slate-300 text-sm">
+                  <Badge variant="secondary">Small Box</Badge>
+                  <span className="text-muted-foreground text-sm">
                     Small cube (-2, 0, 0)
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge
-                    variant="secondary"
-                    className="bg-purple-500/20 text-purple-300"
-                  >
-                    Small Sphere
-                  </Badge>
-                  <span className="text-slate-300 text-sm">
+                  <Badge variant="secondary">Small Sphere</Badge>
+                  <span className="text-muted-foreground text-sm">
                     Small ball (0, 0, -2)
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Badge
-                    variant="secondary"
-                    className="bg-pink-500/20 text-pink-300"
-                  >
-                    Small Cylinder
-                  </Badge>
-                  <span className="text-slate-300 text-sm">
+                  <Badge variant="secondary">Small Cylinder</Badge>
+                  <span className="text-muted-foreground text-sm">
                     Small tube (0, 2, 0)
                   </span>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">
+                <CardTitle className="text-foreground">
                   3D Coordinate System
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>X-axis:</strong> Left (-) → Right (+)
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Y-axis:</strong> Down (-) → Up (+)
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Z-axis:</strong> Back (-) → Front (+)
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Position:</strong> [x, y, z]
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Rotation:</strong> [x, y, z] (radians)
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">Geometry Types</CardTitle>
+                <CardTitle className="text-foreground">
+                  Geometry Types
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <div className="flex items-center gap-2 text-slate-300 text-sm">
+                <div className="flex items-center gap-2 text-muted-foreground text-sm">
                   <Cube className="w-4 h-4" />
                   <span>Box: args=[width, height, depth]</span>
                 </div>
-                <div className="flex items-center gap-2 text-slate-300 text-sm">
+                <div className="flex items-center gap-2 text-muted-foreground text-sm">
                   <Circle className="w-4 h-4" />
                   <span>
                     Sphere: args=[radius, widthSegments, heightSegments]
                   </span>
                 </div>
-                <div className="flex items-center gap-2 text-slate-300 text-sm">
+                <div className="flex items-center gap-2 text-muted-foreground text-sm">
                   <CylinderIcon className="w-4 h-4" />
                   <span>
                     Cylinder: args=[topRadius, bottomRadius, height, segments]
                   </span>
                 </div>
-                <div className="flex items-center gap-2 text-slate-300 text-sm">
+                <div className="flex items-center gap-2 text-muted-foreground text-sm">
                   <Square className="w-4 h-4" />
                   <span>Plane: args=[width, height]</span>
                 </div>

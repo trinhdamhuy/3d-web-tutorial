@@ -10,9 +10,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Download, ArrowLeft } from "lucide-react";
+import { Download } from "lucide-react";
 import { Suspense } from "react";
-import Link from "next/link";
 
 // Component to load GLB model
 function Model() {
@@ -102,31 +101,12 @@ export default function LoadModel() {
   return (
     <div className="p-4">
       <div className="max-w-6xl mx-auto">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 mb-6">
-          <Link
-            href="/"
-            className="text-slate-400 hover:text-white transition-colors"
-          >
-            Home
-          </Link>
-          <ArrowLeft className="w-4 h-4 text-slate-400 rotate-180" />
-          <Link
-            href="/basic"
-            className="text-slate-400 hover:text-white transition-colors"
-          >
-            Basic Level
-          </Link>
-          <ArrowLeft className="w-4 h-4 text-slate-400 rotate-180" />
-          <span className="text-white font-medium">Load Model GLB</span>
-        </div>
-
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-white mb-2 flex items-center gap-2">
+          <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
             <Download className="w-8 h-8" />
             Lesson 4: Load Model GLB
           </h1>
-          <p className="text-slate-300">
+          <p className="text-muted-foreground">
             Load 3D models, add shadows and realistic lighting
           </p>
         </div>
@@ -134,10 +114,12 @@ export default function LoadModel() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* 3D Scene */}
           <div className="lg:col-span-2">
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">3D Model Scene</CardTitle>
-                <CardDescription className="text-slate-300">
+                <CardTitle className="text-foreground">
+                  3D Model Scene
+                </CardTitle>
+                <CardDescription className="text-muted-foreground">
                   Scene with 3D models, shadows and realistic lighting
                 </CardDescription>
               </CardHeader>
@@ -161,88 +143,94 @@ export default function LoadModel() {
 
           {/* Concepts */}
           <div className="space-y-4">
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">Concepts Learned</CardTitle>
+                <CardTitle className="text-foreground">
+                  Concepts Learned
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">useGLTF</Badge>
-                  <span className="text-slate-300 text-sm">
+                  <span className="text-muted-foreground text-sm">
                     Load GLB models
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">Environment</Badge>
-                  <span className="text-slate-300 text-sm">
+                  <span className="text-muted-foreground text-sm">
                     Environmental lighting
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">Shadows</Badge>
-                  <span className="text-slate-300 text-sm">
+                  <span className="text-muted-foreground text-sm">
                     Realistic shadows
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">ContactShadows</Badge>
-                  <span className="text-slate-300 text-sm">
+                  <span className="text-muted-foreground text-sm">
                     Contact shadows
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">Suspense</Badge>
-                  <span className="text-slate-300 text-sm">Loading state</span>
+                  <span className="text-muted-foreground text-sm">
+                    Loading state
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">ToneMapping</Badge>
-                  <span className="text-slate-300 text-sm">
+                  <span className="text-muted-foreground text-sm">
                     Color processing
                   </span>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">Advanced Lighting</CardTitle>
+                <CardTitle className="text-foreground">
+                  Advanced Lighting
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Environment:</strong> Sunset preset
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Directional Light:</strong> Shadow casting
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Point Lights:</strong> Colored lighting
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Ambient Light:</strong> Base illumination
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Shadow Maps:</strong> 2048x2048 resolution
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">
+                <CardTitle className="text-foreground">
                   Material Properties
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Metalness:</strong> 0.6-0.8 (metallic)
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Roughness:</strong> 0.2-0.3 (smooth)
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Cast Shadow:</strong> Create shadows
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Receive Shadow:</strong> Receive shadows
                 </div>
               </CardContent>

@@ -14,11 +14,9 @@ import {
   Smartphone,
   Monitor,
   Tablet,
-  TabletSmartphone,
-  ArrowLeft,
+  TabletSmartphone as Responsive,
 } from "lucide-react";
-import { useEffect, useRef } from "react";
-import Link from "next/link";
+import { useEffect } from "react";
 
 // Component to adjust camera based on screen size
 function ResponsiveCamera() {
@@ -51,7 +49,7 @@ function ViewportInfo() {
   const { size, viewport } = useThree();
 
   return (
-    <div className="absolute top-4 left-4 bg-black/50 text-white p-2 rounded text-xs">
+    <div className="absolute top-4 left-4 bg-background/80 text-foreground p-2 rounded text-xs border">
       <div>
         Screen: {size.width} x {size.height}
       </div>
@@ -112,31 +110,12 @@ export default function ResponsiveViewport() {
   return (
     <div className="p-4">
       <div className="max-w-6xl mx-auto">
-        {/* Breadcrumb */}
-        <div className="flex items-center gap-2 mb-6">
-          <Link
-            href="/"
-            className="text-slate-400 hover:text-white transition-colors"
-          >
-            Home
-          </Link>
-          <ArrowLeft className="w-4 h-4 text-slate-400 rotate-180" />
-          <Link
-            href="/basic"
-            className="text-slate-400 hover:text-white transition-colors"
-          >
-            Basic Level
-          </Link>
-          <ArrowLeft className="w-4 h-4 text-slate-400 rotate-180" />
-          <span className="text-white font-medium">Responsive Viewport</span>
-        </div>
-
         <div className="mb-6">
-          <h1 className="text-3xl font-bold text-white mb-2 flex items-center gap-2">
-            <TabletSmartphone className="w-8 h-8" />
+          <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
+            <Responsive className="w-8 h-8" />
             Lesson 5: Responsive Viewport
           </h1>
-          <p className="text-slate-300">
+          <p className="text-muted-foreground">
             Automatically adjust camera based on screen size
           </p>
         </div>
@@ -144,12 +123,12 @@ export default function ResponsiveViewport() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* 3D Scene */}
           <div className="lg:col-span-2">
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">
+                <CardTitle className="text-foreground">
                   Responsive 3D Scene
                 </CardTitle>
-                <CardDescription className="text-slate-300">
+                <CardDescription className="text-muted-foreground">
                   Resize the window to see the camera automatically adjust
                 </CardDescription>
               </CardHeader>
@@ -166,58 +145,62 @@ export default function ResponsiveViewport() {
 
           {/* Concepts */}
           <div className="space-y-4">
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">Concepts Learned</CardTitle>
+                <CardTitle className="text-foreground">
+                  Concepts Learned
+                </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">useThree</Badge>
-                  <span className="text-slate-300 text-sm">
+                  <span className="text-muted-foreground text-sm">
                     Get scene information
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">size</Badge>
-                  <span className="text-slate-300 text-sm">
+                  <span className="text-muted-foreground text-sm">
                     Viewport dimensions
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">viewport</Badge>
-                  <span className="text-slate-300 text-sm">
+                  <span className="text-muted-foreground text-sm">
                     Viewport coordinates
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">camera.position</Badge>
-                  <span className="text-slate-300 text-sm">
+                  <span className="text-muted-foreground text-sm">
                     Camera position
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">camera.fov</Badge>
-                  <span className="text-slate-300 text-sm">
+                  <span className="text-muted-foreground text-sm">
                     Camera field of view
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary">updateProjectionMatrix</Badge>
-                  <span className="text-slate-300 text-sm">Update camera</span>
+                  <span className="text-muted-foreground text-sm">
+                    Update camera
+                  </span>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">
+                <CardTitle className="text-foreground">
                   Responsive Breakpoints
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <Smartphone className="w-4 h-4 text-blue-400" />
-                  <div className="text-slate-300 text-sm">
+                  <Smartphone className="w-4 h-4 text-primary" />
+                  <div className="text-muted-foreground text-sm">
                     <strong>Mobile:</strong> &lt; 768px
                     <br />
                     <span className="text-xs">
@@ -226,8 +209,8 @@ export default function ResponsiveViewport() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Tablet className="w-4 h-4 text-green-400" />
-                  <div className="text-slate-300 text-sm">
+                  <Tablet className="w-4 h-4 text-primary" />
+                  <div className="text-muted-foreground text-sm">
                     <strong>Tablet:</strong> 768px - 1024px
                     <br />
                     <span className="text-xs">
@@ -236,8 +219,8 @@ export default function ResponsiveViewport() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Monitor className="w-4 h-4 text-purple-400" />
-                  <div className="text-slate-300 text-sm">
+                  <Monitor className="w-4 h-4 text-primary" />
+                  <div className="text-muted-foreground text-sm">
                     <strong>Desktop:</strong> &gt; 1024px
                     <br />
                     <span className="text-xs">
@@ -248,24 +231,24 @@ export default function ResponsiveViewport() {
               </CardContent>
             </Card>
 
-            <Card className="bg-slate-800/50 border-slate-700">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-white">Viewport Info</CardTitle>
+                <CardTitle className="text-foreground">Viewport Info</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Screen Size:</strong> Actual screen dimensions
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Viewport Size:</strong> 3D viewport dimensions
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Pixel Ratio:</strong> Device pixel ratio
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>FOV:</strong> Field of View (viewing angle)
                 </div>
-                <div className="text-slate-300 text-sm">
+                <div className="text-muted-foreground text-sm">
                   <strong>Position:</strong> Camera position [x, y, z]
                 </div>
               </CardContent>
