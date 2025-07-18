@@ -9,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
   Box as Cube,
   Circle,
@@ -18,6 +17,7 @@ import {
   Grid3X3,
 } from "lucide-react";
 import { CodeDisplay } from "@/app/_components/code-display";
+import { FeatureListCard } from "@/app/_components/feature-list-card";
 
 function Scene() {
   return (
@@ -130,6 +130,41 @@ export default function MultiObject() {
 }`;
 
 export default function MultiObject() {
+  const objects = [
+    { badge: "Box", description: "Cube (0, 0, 0)" },
+    { badge: "Sphere", description: "Ball (0, 0, 2)" },
+    { badge: "Cylinder", description: "Tube (2, 0, 0)" },
+    { badge: "Small Box", description: "Small cube (-2, 0, 0)" },
+    { badge: "Small Sphere", description: "Small ball (0, 0, -2)" },
+    { badge: "Small Cylinder", description: "Small tube (0, 2, 0)" },
+  ];
+
+  const coordinateSystem = [
+    { label: "X-axis", description: "Left (-) → Right (+)" },
+    { label: "Y-axis", description: "Down (-) → Up (+)" },
+    { label: "Z-axis", description: "Back (-) → Front (+)" },
+    { label: "Position", description: "[x, y, z]" },
+    { label: "Rotation", description: "[x, y, z] (radians)" },
+  ];
+
+  const geometryTypes = [
+    {
+      icon: <Cube className="w-4 h-4" />,
+      description: "Box: args=[width, height, depth]",
+    },
+    {
+      icon: <Circle className="w-4 h-4" />,
+      description: "Sphere: args=[radius, widthSegments, heightSegments]",
+    },
+    {
+      icon: <CylinderIcon className="w-4 h-4" />,
+      description: "Cylinder: args=[topRadius, bottomRadius, height, segments]",
+    },
+    {
+      icon: <Square className="w-4 h-4" />,
+      description: "Plane: args=[width, height]",
+    },
+  ];
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-6">
@@ -171,102 +206,12 @@ export default function MultiObject() {
 
         {/* Concepts */}
         <div className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-foreground">3D Objects</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Box</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Cube (0, 0, 0)
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Sphere</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Ball (0, 0, 2)
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Cylinder</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Tube (2, 0, 0)
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Small Box</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Small cube (-2, 0, 0)
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Small Sphere</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Small ball (0, 0, -2)
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Small Cylinder</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Small tube (0, 2, 0)
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-foreground">
-                3D Coordinate System
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="text-muted-foreground text-sm">
-                <strong>X-axis:</strong> Left (-) → Right (+)
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Y-axis:</strong> Down (-) → Up (+)
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Z-axis:</strong> Back (-) → Front (+)
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Position:</strong> [x, y, z]
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Rotation:</strong> [x, y, z] (radians)
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-foreground">Geometry Types</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <Cube className="w-4 h-4" />
-                <span>Box: args=[width, height, depth]</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <Circle className="w-4 h-4" />
-                <span>
-                  Sphere: args=[radius, widthSegments, heightSegments]
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <CylinderIcon className="w-4 h-4" />
-                <span>
-                  Cylinder: args=[topRadius, bottomRadius, height, segments]
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <Square className="w-4 h-4" />
-                <span>Plane: args=[width, height]</span>
-              </div>
-            </CardContent>
-          </Card>
+          <FeatureListCard title="3D Objects" items={objects} />
+          <FeatureListCard
+            title="3D Coordinate System"
+            items={coordinateSystem}
+          />
+          <FeatureListCard title="Geometry Types" items={geometryTypes} />
         </div>
       </div>
     </div>

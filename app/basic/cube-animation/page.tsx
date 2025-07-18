@@ -125,7 +125,6 @@ function Scene() {
 }
 
 export default function CubeAnimation() {
-  // Concepts array for FeatureListCard
   const concepts = [
     {
       badge: "useRef",

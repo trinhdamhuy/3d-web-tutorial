@@ -266,10 +266,13 @@ export default function ResponsiveViewport() {
           />
         </div>
 
-        {/* Concepts */}
+        {/* Concepts (right column) */}
         <div className="space-y-4">
+          {/* Concepts Learned */}
           <FeatureListCard title="Concepts Learned" items={concepts} />
+          {/* Responsive Breakpoints */}
           <FeatureListCard title="Responsive Breakpoints" items={breakpoints} />
+          {/* Viewport Info */}
           <FeatureListCard title="Viewport Info" items={viewportInfo} />
         </div>
       </div>

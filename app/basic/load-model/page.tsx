@@ -252,10 +252,13 @@ export default function LoadModel() {
           />
         </div>
 
-        {/* Concepts */}
+        {/* Concepts (right column) */}
         <div className="space-y-4">
+          {/* Concepts Learned */}
           <FeatureListCard title="Concepts Learned" items={concepts} />
+          {/* Advanced Lighting */}
           <FeatureListCard title="Advanced Lighting" items={lighting} />
+          {/* Material Properties */}
           <FeatureListCard title="Material Properties" items={materialProps} />
         </div>
       </div>
