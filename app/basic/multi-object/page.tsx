@@ -17,6 +17,7 @@ import {
   Square,
   Grid3X3,
 } from "lucide-react";
+import { NextLesson } from "@/app/_components/next-lesson";
 
 function Scene() {
   return (
@@ -210,6 +211,9 @@ export default function MultiObject() {
             </Card>
           </div>
         </div>
+
+        {/* Next Lesson Button */}
+        <NextLesson currentLessonId="multi-object" scope="basic" />
       </div>
     </div>
   );

@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { RotateCcw, MousePointer, Palette } from "lucide-react";
+import { NextLesson } from "@/app/_components/next-lesson";
 import { Mesh } from "three";
 
 function AnimatedCube() {
@@ -190,6 +191,9 @@ export default function CubeAnimation() {
             </Card>
           </div>
         </div>
+
+        {/* Next Lesson Button */}
+        <NextLesson currentLessonId="cube-animation" scope="basic" />
       </div>
     </div>
   );

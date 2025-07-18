@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Box as Cube, MousePointer } from "lucide-react";
+import { NextLesson } from "@/app/_components/next-lesson";
 
 function Scene() {
   return (
@@ -160,6 +161,9 @@ export default function HelloCube() {
             </Card>
           </div>
         </div>
+
+        {/* Next Lesson Button */}
+        <NextLesson currentLessonId="hello-cube" scope="basic" />
       </div>
     </div>
   );

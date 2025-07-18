@@ -16,6 +16,7 @@ import {
   Tablet,
   TabletSmartphone as Responsive,
 } from "lucide-react";
+import { NextLesson } from "@/app/_components/next-lesson";
 import { useEffect, useState } from "react";
 
 // Component to adjust camera based on screen size
@@ -272,6 +273,9 @@ export default function ResponsiveViewport() {
             </Card>
           </div>
         </div>
+
+        {/* Next Lesson Button */}
+        <NextLesson currentLessonId="responsive-viewport" scope="basic" />
       </div>
     </div>
   );

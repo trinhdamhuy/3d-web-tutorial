@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Download } from "lucide-react";
+import { NextLesson } from "@/app/_components/next-lesson";
 import { Suspense } from "react";
 
 // Component to load GLB model
@@ -237,6 +238,9 @@ export default function LoadModel() {
             </Card>
           </div>
         </div>
+
+        {/* Next Lesson Button */}
+        <NextLesson currentLessonId="load-model" scope="basic" />
       </div>
     </div>
   );
