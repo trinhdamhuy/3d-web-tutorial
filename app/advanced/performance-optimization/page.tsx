@@ -91,7 +91,7 @@ function PerformanceOptimizationScene() {
           rotation={[-Math.PI / 2, 0, 0]}
           receiveShadow={showShadow}
         >
-          <meshStandardMaterial color="gray" />
+          <meshStandardMaterial color="white" />
         </Plane>
         <Suspense fallback={<span>Loading...</span>}>
           <Instances
@@ -207,7 +207,7 @@ function PerformanceOptimizationScene() {
           rotation={[-Math.PI / 2, 0, 0]}
           receiveShadow={showShadow}
         >
-          <meshStandardMaterial color="gray" />
+          <meshStandardMaterial color="white" />
         </Plane>
         <Suspense fallback={<span>Loading...</span>}>
           <Instances
