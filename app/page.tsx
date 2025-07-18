@@ -1,103 +1,245 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Box as Cube,
+  BookOpen,
+  Code,
+  Lightbulb,
+  Play,
+  ArrowRight,
+  GraduationCap,
+  Zap,
+  Star,
+} from "lucide-react";
+
+const levels = [
+  {
+    id: "basic",
+    title: "Basic Level",
+    description: "Master fundamental 3D web development concepts",
+    icon: GraduationCap,
+    color: "bg-blue-500/20 text-blue-300",
+    status: "available",
+    lessons: 5,
+    concepts: ["Canvas", "Mesh", "Animation", "Lighting", "Controls"],
+    path: "/basic",
+  },
+  {
+    id: "medium",
+    title: "Medium Level",
+    description: "Advanced techniques and complex interactions",
+    icon: Zap,
+    color: "bg-green-500/20 text-green-300",
+    status: "coming-soon",
+    lessons: 0,
+    concepts: ["Physics", "Particles", "Post-processing", "Performance"],
+    path: "#",
+  },
+  {
+    id: "advanced",
+    title: "Advanced Level",
+    description: "Expert-level projects and optimization",
+    icon: Star,
+    color: "bg-purple-500/20 text-purple-300",
+    status: "coming-soon",
+    lessons: 0,
+    concepts: ["Shaders", "Custom Geometry", "VR/AR", "Optimization"],
+    path: "#",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="p-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-white mb-4 flex items-center justify-center gap-3">
+            <Cube className="w-10 h-10 text-blue-400" />
+            3D Web Tutorial
+          </h1>
+          <p className="text-xl text-slate-300 mb-6">
+            Master 3D web development with React Three Fiber and Drei
+          </p>
+          <div className="flex items-center justify-center gap-4 text-slate-400">
+            <div className="flex items-center gap-2">
+              <BookOpen className="w-5 h-5" />
+              <span>3 Learning Levels</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Code className="w-5 h-5" />
+              <span>React Three Fiber + Drei</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Lightbulb className="w-5 h-5" />
+              <span>Hands-on Projects</span>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Learning Levels */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {levels.map((level) => (
+            <Card
+              key={level.id}
+              className={`bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-colors ${
+                level.status === "coming-soon" ? "opacity-50" : ""
+              }`}
+            >
+              <CardHeader>
+                <div className="flex items-center gap-3 mb-2">
+                  <div className={`p-2 rounded-lg ${level.color}`}>
+                    <level.icon className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-white">{level.title}</CardTitle>
+                    <CardDescription className="text-slate-400">
+                      {level.description}
+                    </CardDescription>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-slate-300 text-sm">Lessons</span>
+                  <Badge variant="secondary">{level.lessons}</Badge>
+                </div>
+
+                <div className="space-y-2">
+                  <h4 className="text-sm font-medium text-white">
+                    Key concepts:
+                  </h4>
+                  <div className="flex flex-wrap gap-1">
+                    {level.concepts.map((concept) => (
+                      <Badge
+                        key={concept}
+                        variant="secondary"
+                        className="text-xs"
+                      >
+                        {concept}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+
+                {level.status === "available" ? (
+                  <Link href={level.path}>
+                    <Button className="w-full" variant="default">
+                      <Play className="w-4 h-4 mr-2" />
+                      Start Learning
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button className="w-full" variant="outline" disabled>
+                    <ArrowRight className="w-4 h-4 mr-2" />
+                    Coming Soon
+                  </Button>
+                )}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Quick Start */}
+        <Card className="bg-slate-800/50 border-slate-700">
+          <CardHeader>
+            <CardTitle className="text-white">Ready to Start?</CardTitle>
+            <CardDescription className="text-slate-300">
+              Begin your 3D web development journey with our comprehensive
+              tutorials
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/basic" className="flex-1">
+                <Button className="w-full" size="lg">
+                  <GraduationCap className="w-5 h-5 mr-2" />
+                  Start Basic Level
+                </Button>
+              </Link>
+              <div className="flex-1">
+                <Button className="w-full" size="lg" variant="outline" disabled>
+                  <Zap className="w-5 h-5 mr-2" />
+                  Medium Level (Coming Soon)
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Features */}
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="bg-slate-800/50 border-slate-700">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-blue-500/20">
+                  <Cube className="w-5 h-5 text-blue-300" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">Interactive 3D</h3>
+                  <p className="text-sm text-slate-400">Real-time 3D scenes</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-slate-800/50 border-slate-700">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-green-500/20">
+                  <Code className="w-5 h-5 text-green-300" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">Modern Stack</h3>
+                  <p className="text-sm text-slate-400">
+                    React Three Fiber + Drei
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-slate-800/50 border-slate-700">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-purple-500/20">
+                  <Lightbulb className="w-5 h-5 text-purple-300" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">Hands-on</h3>
+                  <p className="text-sm text-slate-400">Learn by doing</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-slate-800/50 border-slate-700">
+            <CardContent className="pt-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-orange-500/20">
+                  <Play className="w-5 h-5 text-orange-300" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-white">Progressive</h3>
+                  <p className="text-sm text-slate-400">
+                    Step-by-step learning
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

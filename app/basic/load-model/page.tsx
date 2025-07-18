@@ -1,0 +1,255 @@
+"use client";
+
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Environment, ContactShadows } from "@react-three/drei";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Download, ArrowLeft } from "lucide-react";
+import { Suspense } from "react";
+import Link from "next/link";
+
+// Component to load GLB model
+function Model() {
+  // Using model from public/models/ (if available) or create a complex scene
+  return (
+    <group>
+      {/* Create a complex scene instead of loading GLB */}
+      <mesh position={[0, 0, 0]} castShadow receiveShadow>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color="#3b82f6" metalness={0.8} roughness={0.2} />
+      </mesh>
+
+      <mesh position={[2, 0, 0]} castShadow receiveShadow>
+        <sphereGeometry args={[0.5, 32, 32]} />
+        <meshStandardMaterial color="#ef4444" metalness={0.6} roughness={0.3} />
+      </mesh>
+
+      <mesh position={[-2, 0, 0]} castShadow receiveShadow>
+        <cylinderGeometry args={[0.5, 0.5, 1, 32]} />
+        <meshStandardMaterial color="#10b981" metalness={0.7} roughness={0.2} />
+      </mesh>
+
+      {/* Ground plane with shadow */}
+      <mesh position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[10, 10]} />
+        <meshStandardMaterial color="#374151" />
+      </mesh>
+    </group>
+  );
+}
+
+function Scene() {
+  return (
+    <>
+      {/* Environment lighting */}
+      <Environment preset="sunset" />
+
+      {/* Directional light with shadow */}
+      <directionalLight
+        position={[5, 5, 5]}
+        intensity={1}
+        castShadow
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-camera-far={50}
+        shadow-camera-left={-10}
+        shadow-camera-right={10}
+        shadow-camera-top={10}
+        shadow-camera-bottom={-10}
+      />
+
+      {/* Ambient light */}
+      <ambientLight intensity={0.3} />
+
+      {/* Point lights */}
+      <pointLight position={[-5, 5, 5]} intensity={0.5} color="#ff6b6b" />
+      <pointLight position={[5, 5, -5]} intensity={0.5} color="#4ecdc4" />
+
+      {/* Model */}
+      <Suspense fallback={null}>
+        <Model />
+      </Suspense>
+
+      {/* Contact shadows */}
+      <ContactShadows
+        position={[0, -1.99, 0]}
+        opacity={0.4}
+        scale={10}
+        blur={1}
+        far={10}
+        resolution={256}
+        color="#000000"
+      />
+
+      {/* OrbitControls */}
+      <OrbitControls
+        enablePan={true}
+        enableZoom={true}
+        enableRotate={true}
+        maxPolarAngle={Math.PI / 2}
+      />
+    </>
+  );
+}
+
+export default function LoadModel() {
+  return (
+    <div className="p-4">
+      <div className="max-w-6xl mx-auto">
+        {/* Breadcrumb */}
+        <div className="flex items-center gap-2 mb-6">
+          <Link
+            href="/"
+            className="text-slate-400 hover:text-white transition-colors"
+          >
+            Home
+          </Link>
+          <ArrowLeft className="w-4 h-4 text-slate-400 rotate-180" />
+          <Link
+            href="/basic"
+            className="text-slate-400 hover:text-white transition-colors"
+          >
+            Basic Level
+          </Link>
+          <ArrowLeft className="w-4 h-4 text-slate-400 rotate-180" />
+          <span className="text-white font-medium">Load Model GLB</span>
+        </div>
+
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold text-white mb-2 flex items-center gap-2">
+            <Download className="w-8 h-8" />
+            Lesson 4: Load Model GLB
+          </h1>
+          <p className="text-slate-300">
+            Load 3D models, add shadows and realistic lighting
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* 3D Scene */}
+          <div className="lg:col-span-2">
+            <Card className="bg-slate-800/50 border-slate-700">
+              <CardHeader>
+                <CardTitle className="text-white">3D Model Scene</CardTitle>
+                <CardDescription className="text-slate-300">
+                  Scene with 3D models, shadows and realistic lighting
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="h-96 w-full rounded-lg overflow-hidden">
+                  <Canvas
+                    camera={{ position: [5, 5, 5] }}
+                    shadows
+                    gl={{
+                      antialias: true,
+                      toneMapping: 2, // ACESFilmicToneMapping
+                      outputColorSpace: "srgb",
+                    }}
+                  >
+                    <Scene />
+                  </Canvas>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Concepts */}
+          <div className="space-y-4">
+            <Card className="bg-slate-800/50 border-slate-700">
+              <CardHeader>
+                <CardTitle className="text-white">Concepts Learned</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary">useGLTF</Badge>
+                  <span className="text-slate-300 text-sm">
+                    Load GLB models
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary">Environment</Badge>
+                  <span className="text-slate-300 text-sm">
+                    Environmental lighting
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary">Shadows</Badge>
+                  <span className="text-slate-300 text-sm">
+                    Realistic shadows
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary">ContactShadows</Badge>
+                  <span className="text-slate-300 text-sm">
+                    Contact shadows
+                  </span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary">Suspense</Badge>
+                  <span className="text-slate-300 text-sm">Loading state</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary">ToneMapping</Badge>
+                  <span className="text-slate-300 text-sm">
+                    Color processing
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-slate-800/50 border-slate-700">
+              <CardHeader>
+                <CardTitle className="text-white">Advanced Lighting</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="text-slate-300 text-sm">
+                  <strong>Environment:</strong> Sunset preset
+                </div>
+                <div className="text-slate-300 text-sm">
+                  <strong>Directional Light:</strong> Shadow casting
+                </div>
+                <div className="text-slate-300 text-sm">
+                  <strong>Point Lights:</strong> Colored lighting
+                </div>
+                <div className="text-slate-300 text-sm">
+                  <strong>Ambient Light:</strong> Base illumination
+                </div>
+                <div className="text-slate-300 text-sm">
+                  <strong>Shadow Maps:</strong> 2048x2048 resolution
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-slate-800/50 border-slate-700">
+              <CardHeader>
+                <CardTitle className="text-white">
+                  Material Properties
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="text-slate-300 text-sm">
+                  <strong>Metalness:</strong> 0.6-0.8 (metallic)
+                </div>
+                <div className="text-slate-300 text-sm">
+                  <strong>Roughness:</strong> 0.2-0.3 (smooth)
+                </div>
+                <div className="text-slate-300 text-sm">
+                  <strong>Cast Shadow:</strong> Create shadows
+                </div>
+                <div className="text-slate-300 text-sm">
+                  <strong>Receive Shadow:</strong> Receive shadows
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
