@@ -12,6 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Box as Cube, MousePointer } from "lucide-react";
 import { NextLesson } from "@/app/_components/next-lesson";
+import { CodeDisplay } from "@/app/_components/code-display";
 
 function Scene() {
   return (
@@ -32,6 +33,26 @@ function Scene() {
     </>
   );
 }
+
+const sceneCode = `function Scene() {
+  return (
+    <>
+      {/* Ambient Light - environmental lighting */}
+      <ambientLight intensity={0.4} />
+
+      {/* Point Light - point source lighting */}
+      <pointLight position={[10, 10, 10]} intensity={1} />
+
+      {/* Box geometry */}
+      <Box args={[1, 1, 1]} position={[0, 0, 0]}>
+        <meshStandardMaterial color="orange" />
+      </Box>
+
+      {/* OrbitControls for camera rotation */}
+      <OrbitControls />
+    </>
+  );
+}`;
 
 export default function HelloCube() {
   return (
@@ -65,6 +86,13 @@ export default function HelloCube() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Code Display */}
+            <CodeDisplay
+              code={sceneCode}
+              title="Scene Component Code"
+              description="The main 3D scene component with lighting, geometry, and controls"
+            />
           </div>
 
           {/* Concepts */}

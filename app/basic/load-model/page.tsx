@@ -12,6 +12,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Download } from "lucide-react";
 import { NextLesson } from "@/app/_components/next-lesson";
+import { CodeDisplay } from "@/app/_components/code-display";
 import { Suspense } from "react";
 
 // Component to load GLB model
@@ -43,6 +44,36 @@ function Model() {
     </group>
   );
 }
+
+const modelCode = `// Component to load GLB model
+function Model() {
+  // Using model from public/models/ (if available) or create a complex scene
+  return (
+    <group>
+      {/* Create a complex scene instead of loading GLB */}
+      <mesh position={[0, 0, 0]} castShadow receiveShadow>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color="#3b82f6" metalness={0.8} roughness={0.2} />
+      </mesh>
+
+      <mesh position={[2, 0, 0]} castShadow receiveShadow>
+        <sphereGeometry args={[0.5, 32, 32]} />
+        <meshStandardMaterial color="#ef4444" metalness={0.6} roughness={0.3} />
+      </mesh>
+
+      <mesh position={[-2, 0, 0]} castShadow receiveShadow>
+        <cylinderGeometry args={[0.5, 0.5, 1, 32]} />
+        <meshStandardMaterial color="#10b981" metalness={0.7} roughness={0.2} />
+      </mesh>
+
+      {/* Ground plane with shadow */}
+      <mesh position={[0, -2, 0]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
+        <planeGeometry args={[10, 10]} />
+        <meshStandardMaterial color="#374151" />
+      </mesh>
+    </group>
+  );
+}`;
 
 function Scene() {
   return (
@@ -140,6 +171,13 @@ export default function LoadModel() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Code Display */}
+            <CodeDisplay
+              code={modelCode}
+              title="Model Component"
+              description="3D model component with shadows and realistic materials"
+            />
           </div>
 
           {/* Concepts */}

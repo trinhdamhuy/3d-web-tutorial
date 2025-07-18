@@ -86,7 +86,7 @@ const basicLessons = [
 
 export function Header() {
   return (
-    <header className="border-b">
+    <header className="sticky top-0 z-50 backdrop-blur-sm bg-background/50 shadow-xs">
       <div className="max-w-6xl mx-auto px-4">
         {/* Navigation Menu */}
         <div className="py-4 flex justify-between items-center">

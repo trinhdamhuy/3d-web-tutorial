@@ -17,6 +17,7 @@ import {
   TabletSmartphone as Responsive,
 } from "lucide-react";
 import { NextLesson } from "@/app/_components/next-lesson";
+import { CodeDisplay } from "@/app/_components/code-display";
 import { useEffect, useState } from "react";
 
 // Component to adjust camera based on screen size
@@ -44,6 +45,32 @@ function ResponsiveCamera() {
 
   return null;
 }
+
+const responsiveCameraCode = `// Component to adjust camera based on screen size
+function ResponsiveCamera() {
+  const { camera, size } = useThree();
+
+  useEffect(() => {
+    // Adjust camera based on viewport size
+    if (size.width < 768) {
+      // Mobile
+      camera.position.set(4, 4, 4);
+      if ("fov" in camera) camera.fov = 75;
+    } else if (size.width < 1024) {
+      // Tablet
+      camera.position.set(5, 5, 5);
+      if ("fov" in camera) camera.fov = 60;
+    } else {
+      // Desktop
+      camera.position.set(6, 6, 6);
+      if ("fov" in camera) camera.fov = 50;
+    }
+
+    camera.updateProjectionMatrix();
+  }, [camera, size.width, size.height]);
+
+  return null;
+}`;
 
 // Component to display viewport information
 function ViewportInfo() {
@@ -159,6 +186,13 @@ export default function ResponsiveViewport() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Code Display */}
+            <CodeDisplay
+              code={responsiveCameraCode}
+              title="Responsive Camera Component"
+              description="Camera component that adjusts based on screen size"
+            />
           </div>
 
           {/* Concepts */}

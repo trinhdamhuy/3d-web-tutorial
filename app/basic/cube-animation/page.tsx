@@ -14,6 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { RotateCcw, MousePointer, Palette } from "lucide-react";
 import { NextLesson } from "@/app/_components/next-lesson";
+import { CodeDisplay } from "@/app/_components/code-display";
 import { Mesh } from "three";
 
 function AnimatedCube() {
@@ -46,6 +47,37 @@ function AnimatedCube() {
     </Box>
   );
 }
+
+const animatedCubeCode = `function AnimatedCube() {
+  const meshRef = useRef<Mesh>(null);
+  const [hovered, setHovered] = useState(false);
+
+  // Animation loop - runs every frame
+  useFrame((state, delta) => {
+    if (meshRef.current) {
+      // Rotate cube around Y axis
+      meshRef.current.rotation.y += delta * 2;
+      // Rotate cube around X axis at slower speed
+      meshRef.current.rotation.x += delta * 0.5;
+    }
+  });
+
+  return (
+    <Box
+      ref={meshRef}
+      args={[1, 1, 1]}
+      position={[0, 0, 0]}
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+    >
+      <meshStandardMaterial
+        color={hovered ? "#ff6b6b" : "#4ecdc4"}
+        roughness={0.3}
+        metalness={0.7}
+      />
+    </Box>
+  );
+}`;
 
 function Scene() {
   return (
@@ -98,6 +130,13 @@ export default function CubeAnimation() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Code Display */}
+            <CodeDisplay
+              code={animatedCubeCode}
+              title="Animated Cube Component"
+              description="Interactive cube with rotation animation and hover effects"
+            />
           </div>
 
           {/* Concepts */}
