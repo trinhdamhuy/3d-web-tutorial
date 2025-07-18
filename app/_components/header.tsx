@@ -21,6 +21,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { ThemeToggle } from "./theme-toggle";
 
 const levels = [
   {
@@ -85,10 +86,10 @@ const basicLessons = [
 
 export function Header() {
   return (
-    <div className="border-b">
+    <header className="border-b">
       <div className="max-w-6xl mx-auto px-4">
         {/* Navigation Menu */}
-        <div className="py-4 flex justify-center">
+        <div className="py-4 flex justify-between items-center">
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
@@ -150,9 +151,12 @@ export function Header() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
+
+          {/* Theme Toggle */}
+          <ThemeToggle />
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 

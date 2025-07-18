@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "./_components/header";
 import { AutoBreadcrumb } from "./_components/auto-breadcrumb";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -26,19 +27,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geist.variable} ${geistMono.variable} antialiased`}>
-        <Header />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
 
-        {/* Auto Breadcrumb */}
-        <div className="max-w-6xl mx-auto px-4">
-          <AutoBreadcrumb />
-        </div>
+          {/* Auto Breadcrumb */}
+          <div className="max-w-6xl mx-auto px-4">
+            <AutoBreadcrumb />
+          </div>
 
-        {/* Main Content */}
-        <main className="min-h-screen bg-gradient-to-br from-background to-muted">
-          {children}
-        </main>
+          {/* Main Content */}
+          <main className="min-h-screen bg-gradient-to-br from-background to-muted">
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

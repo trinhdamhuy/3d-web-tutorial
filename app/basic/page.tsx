@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   Card,
   CardContent,
@@ -8,8 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   RotateCcw,
   Grid3X3,
@@ -21,8 +18,10 @@ import {
   Code,
   Lightbulb,
 } from "lucide-react";
+import { Lesson } from "@/types";
+import { LessonCard } from "@/app/_components/lesson-card";
 
-const lessons = [
+const lessons: Lesson[] = [
   {
     id: "hello-cube",
     title: "Hello Cube",
@@ -105,60 +104,11 @@ export default function BasicPage() {
         {/* Lessons Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {lessons.map((lesson, index) => (
-            <Card
+            <LessonCard
               key={lesson.id}
-              className="hover:border-primary transition-colors"
-            >
-              <CardHeader>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      <lesson.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <CardTitle className="text-foreground">
-                        Lesson {index + 1}
-                      </CardTitle>
-                      <CardDescription className="text-muted-foreground">
-                        {lesson.title}
-                      </CardDescription>
-                    </div>
-                  </div>
-                  <Badge variant="secondary" className="text-xs">
-                    {lesson.duration}
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground text-sm">
-                  {lesson.description}
-                </p>
-
-                <div className="space-y-2">
-                  <h4 className="text-sm font-medium text-foreground">
-                    Concepts covered:
-                  </h4>
-                  <div className="flex flex-wrap gap-1">
-                    {lesson.concepts.map((concept) => (
-                      <Badge
-                        key={concept}
-                        variant="secondary"
-                        className="text-xs"
-                      >
-                        {concept}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                <Button className="w-full" asChild>
-                  <Link href={lesson.path}>
-                    <Play className="w-4 h-4 mr-2" />
-                    Start Lesson
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
+              lesson={lesson}
+              lessonNumber={index + 1}
+            />
           ))}
         </div>
 

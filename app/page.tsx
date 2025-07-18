@@ -1,29 +1,29 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Box as Cube,
   BookOpen,
   Code,
   Lightbulb,
-  Play,
-  ArrowRight,
   GraduationCap,
   Zap,
   Star,
+  Play,
 } from "lucide-react";
 import Link from "next/link";
+import { LearningLevelCard } from "@/app/_components/learning-level-card";
+import { FeatureCard } from "@/app/_components/feature-card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { LearningLevel } from "@/types";
 
-const levels = [
+const levels: LearningLevel[] = [
   {
     id: "basic",
     title: "Basic Level",
@@ -111,66 +111,7 @@ export default function Home() {
         {/* Learning Levels */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {levels.map((level) => (
-            <Card
-              key={level.id}
-              className={`hover:border-primary transition-colors ${
-                level.status === "coming-soon" ? "opacity-50" : ""
-              }`}
-            >
-              <CardHeader>
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <level.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-foreground">
-                      {level.title}
-                    </CardTitle>
-                    <CardDescription className="text-muted-foreground">
-                      {level.description}
-                    </CardDescription>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4 grow">
-                <div className="flex items-center justify-between">
-                  <span className="text-muted-foreground text-sm">Lessons</span>
-                  <Badge variant="secondary">{level.lessons}</Badge>
-                </div>
-
-                <div className="space-y-2">
-                  <h4 className="text-sm font-medium text-foreground">
-                    Key concepts:
-                  </h4>
-                  <div className="flex flex-wrap gap-1">
-                    {level.concepts.map((concept) => (
-                      <Badge
-                        key={concept}
-                        variant="secondary"
-                        className="text-xs"
-                      >
-                        {concept}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter>
-                {level.status === "available" ? (
-                  <Button className="w-full" asChild>
-                    <Link href={level.path}>
-                      <Play className="w-4 h-4 mr-2" />
-                      Start Learning
-                    </Link>
-                  </Button>
-                ) : (
-                  <Button className="w-full" variant="outline" disabled>
-                    <ArrowRight className="w-4 h-4 mr-2" />
-                    Coming Soon
-                  </Button>
-                )}
-              </CardFooter>
-            </Card>
+            <LearningLevelCard key={level.id} learningLevel={level} />
           ))}
         </div>
 
@@ -202,23 +143,12 @@ export default function Home() {
         {/* Features */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
-            <Card key={index}>
-              <CardContent>
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <feature.icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <CardTitle className="font-semibold text-foreground">
-                      {feature.title}
-                    </CardTitle>
-                    <CardDescription className="text-sm text-muted-foreground">
-                      {feature.description}
-                    </CardDescription>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              key={index}
+              title={feature.title}
+              description={feature.description}
+              icon={feature.icon}
+            />
           ))}
         </div>
       </div>
