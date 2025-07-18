@@ -10,7 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { RotateCcw } from "lucide-react";
-import { NextLesson } from "@/app/_components/next-lesson";
 import { CodeDisplay } from "@/app/_components/code-display";
 import { FeatureListCard } from "@/app/_components/feature-list-card";
 import { useRef, useState } from "react";
@@ -168,56 +167,52 @@ export default function CameraAnimation() {
   ];
 
   return (
-    <div className="p-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
-            <RotateCcw className="w-8 h-8" />
-            Lesson 9: Smooth Camera Animation
-          </h1>
-          <p className="text-muted-foreground">
-            Tween camera movement smoothly when selecting objects
-          </p>
+    <div className="max-w-6xl mx-auto">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
+          <RotateCcw className="w-8 h-8" />
+          Lesson 9: Smooth Camera Animation
+        </h1>
+        <p className="text-muted-foreground">
+          Tween camera movement smoothly when selecting objects
+        </p>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* 3D Scene */}
+        <div className="lg:col-span-2">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-foreground">
+                Camera Animation Scene
+              </CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Click the box to animate the camera
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="h-96 w-full rounded-lg overflow-hidden">
+                <Canvas camera={{ position: [5, 5, 5] }} shadows>
+                  <Scene />
+                </Canvas>
+              </div>
+            </CardContent>
+          </Card>
+          {/* Code Display */}
+          <CodeDisplay
+            code={cameraAnimationCode}
+            title="Camera Animation Scene Code"
+            description="Box triggers camera tween using lerp on click"
+          />
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* 3D Scene */}
-          <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground">
-                  Camera Animation Scene
-                </CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  Click the box to animate the camera
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="h-96 w-full rounded-lg overflow-hidden">
-                  <Canvas camera={{ position: [5, 5, 5] }} shadows>
-                    <Scene />
-                  </Canvas>
-                </div>
-              </CardContent>
-            </Card>
-            {/* Code Display */}
-            <CodeDisplay
-              code={cameraAnimationCode}
-              title="Camera Animation Scene Code"
-              description="Box triggers camera tween using lerp on click"
-            />
-          </div>
-          {/* Sidebar Cards */}
-          <div className="space-y-4">
-            <FeatureListCard title="Camera Animation" items={cameraAnimation} />
-            <FeatureListCard
-              title="Animation Techniques"
-              items={animationTechniques}
-            />
-            <FeatureListCard title="Controls" items={controls} />
-          </div>
+        {/* Sidebar Cards */}
+        <div className="space-y-4">
+          <FeatureListCard title="Camera Animation" items={cameraAnimation} />
+          <FeatureListCard
+            title="Animation Techniques"
+            items={animationTechniques}
+          />
+          <FeatureListCard title="Controls" items={controls} />
         </div>
-        {/* Next Lesson Button */}
-        <NextLesson currentLessonId="camera-animation" scope="intermediate" />
       </div>
     </div>
   );

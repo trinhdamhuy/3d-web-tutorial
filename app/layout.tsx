@@ -5,6 +5,7 @@ import { Header } from "./_components/header";
 import { AutoBreadcrumb } from "./_components/auto-breadcrumb";
 import { ThemeProvider } from "@/components/theme-provider";
 import NextTopLoader from "nextjs-toploader";
+import NextLesson from "@/app/_components/next-lesson";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -45,7 +46,11 @@ export default function RootLayout({
           </div>
 
           {/* Main Content */}
-          <main className="min-h-screen">{children}</main>
+          <main className="min-h-screen p-4 pb-2">{children}</main>
+
+          <div className="max-w-6xl mx-auto p-4">
+            <NextLesson />
+          </div>
         </ThemeProvider>
       </body>
     </html>

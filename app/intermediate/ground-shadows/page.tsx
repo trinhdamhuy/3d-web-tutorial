@@ -10,7 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Layers } from "lucide-react";
-import { NextLesson } from "@/app/_components/next-lesson";
 import { CodeDisplay } from "@/app/_components/code-display";
 import { FeatureListCard } from "@/app/_components/feature-list-card";
 
@@ -150,56 +149,49 @@ const controls = [
 
 export default function GroundShadows() {
   return (
-    <div className="p-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
-            <Layers className="w-8 h-8" />
-            Lesson 6: Ground & Shadows
-          </h1>
-          <p className="text-muted-foreground">
-            Add a ground plane and enable object shadows in your 3D scene
-          </p>
+    <div className="max-w-6xl mx-auto">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
+          <Layers className="w-8 h-8" />
+          Lesson 6: Ground & Shadows
+        </h1>
+        <p className="text-muted-foreground">
+          Add a ground plane and enable object shadows in your 3D scene
+        </p>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* 3D Scene */}
+        <div className="lg:col-span-2">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-foreground">
+                Ground & Shadows Scene
+              </CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Observe how the box casts a shadow onto the ground
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="h-96 w-full rounded-lg overflow-hidden">
+                <Canvas camera={{ position: [4, 4, 4] }} shadows>
+                  <Scene />
+                </Canvas>
+              </div>
+            </CardContent>
+          </Card>
+          {/* Code Display */}
+          <CodeDisplay
+            code={groundShadowsCode}
+            title="Ground & Shadows Scene Code"
+            description="Scene with ground plane and object casting/receiving shadows"
+          />
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* 3D Scene */}
-          <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground">
-                  Ground & Shadows Scene
-                </CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  Observe how the box casts a shadow onto the ground
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="h-96 w-full rounded-lg overflow-hidden">
-                  <Canvas camera={{ position: [4, 4, 4] }} shadows>
-                    <Scene />
-                  </Canvas>
-                </div>
-              </CardContent>
-            </Card>
-            {/* Code Display */}
-            <CodeDisplay
-              code={groundShadowsCode}
-              title="Ground & Shadows Scene Code"
-              description="Scene with ground plane and object casting/receiving shadows"
-            />
-          </div>
-          {/* Sidebar Cards */}
-          <div className="space-y-4">
-            <FeatureListCard title="Shadow Concepts" items={shadowConcepts} />
-            <FeatureListCard
-              title="Lighting & Environment"
-              items={lightingEnv}
-            />
-            <FeatureListCard title="Controls" items={controls} />
-          </div>
+        {/* Sidebar Cards */}
+        <div className="space-y-4">
+          <FeatureListCard title="Shadow Concepts" items={shadowConcepts} />
+          <FeatureListCard title="Lighting & Environment" items={lightingEnv} />
+          <FeatureListCard title="Controls" items={controls} />
         </div>
-        {/* Next Lesson Button */}
-        <NextLesson currentLessonId="ground-shadows" scope="intermediate" />
       </div>
     </div>
   );

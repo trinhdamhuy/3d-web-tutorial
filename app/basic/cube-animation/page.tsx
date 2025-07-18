@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { RotateCcw, MousePointer, Palette } from "lucide-react";
-import { NextLesson } from "@/app/_components/next-lesson";
 import { CodeDisplay } from "@/app/_components/code-display";
 import { Mesh } from "three";
 
@@ -117,140 +116,135 @@ function Scene() {
 
 export default function CubeAnimation() {
   return (
-    <div className="p-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
-            <RotateCcw className="w-8 h-8" />
-            Lesson 2: Cube Animation
-          </h1>
-          <p className="text-muted-foreground">
-            Animate a cube with rotation and hover effects
-          </p>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* 3D Scene */}
-          <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground">
-                  Animated 3D Scene
-                </CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  Hover over the cube to see the color change effect
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="h-96 w-full rounded-lg overflow-hidden">
-                  <Canvas camera={{ position: [3, 3, 3] }}>
-                    <Scene />
-                  </Canvas>
-                </div>
-              </CardContent>
-            </Card>
+    <div className="max-w-6xl mx-auto">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
+          <RotateCcw className="w-8 h-8" />
+          Lesson 2: Cube Animation
+        </h1>
+        <p className="text-muted-foreground">
+          Animate a cube with rotation and hover effects
+        </p>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* 3D Scene */}
+        <div className="lg:col-span-2">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-foreground">
+                Animated 3D Scene
+              </CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Hover over the cube to see the color change effect
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="h-96 w-full rounded-lg overflow-hidden">
+                <Canvas camera={{ position: [3, 3, 3] }}>
+                  <Scene />
+                </Canvas>
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* Code Display */}
-            <CodeDisplay
-              code={animatedCubeCode}
-              title="Animated Cube Component"
-              description="Interactive cube with rotation animation and hover effects"
-            />
-          </div>
-
-          {/* Concepts */}
-          <div className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground">
-                  Concepts Learned
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">useRef</Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Reference to mesh object
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">useFrame</Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Animation loop hook
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">useState</Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Manage hover state
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">onPointerOver</Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Mouse enter event
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">onPointerOut</Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Mouse leave event
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">rotation</Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Object rotation
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground">
-                  Animation Details
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="text-muted-foreground text-sm">
-                  <strong>Rotation Y:</strong> 2 rad/s (fast)
-                </div>
-                <div className="text-muted-foreground text-sm">
-                  <strong>Rotation X:</strong> 0.5 rad/s (slow)
-                </div>
-                <div className="text-muted-foreground text-sm">
-                  <strong>Material:</strong> Metal with roughness 0.3
-                </div>
-                <div className="text-muted-foreground text-sm">
-                  <strong>Colors:</strong> Cyan → Red on hover
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground">Interaction</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                  <MousePointer className="w-4 h-4" />
-                  <span>Hover: Change cube color</span>
-                </div>
-                <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                  <RotateCcw className="w-4 h-4" />
-                  <span>Auto rotation: Continuous</span>
-                </div>
-                <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                  <Palette className="w-4 h-4" />
-                  <span>Material: Reflective metal</span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          {/* Code Display */}
+          <CodeDisplay
+            code={animatedCubeCode}
+            title="Animated Cube Component"
+            description="Interactive cube with rotation animation and hover effects"
+          />
         </div>
 
-        {/* Next Lesson Button */}
-        <NextLesson currentLessonId="cube-animation" scope="basic" />
+        {/* Concepts */}
+        <div className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-foreground">
+                Concepts Learned
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">useRef</Badge>
+                <span className="text-muted-foreground text-sm">
+                  Reference to mesh object
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">useFrame</Badge>
+                <span className="text-muted-foreground text-sm">
+                  Animation loop hook
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">useState</Badge>
+                <span className="text-muted-foreground text-sm">
+                  Manage hover state
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">onPointerOver</Badge>
+                <span className="text-muted-foreground text-sm">
+                  Mouse enter event
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">onPointerOut</Badge>
+                <span className="text-muted-foreground text-sm">
+                  Mouse leave event
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">rotation</Badge>
+                <span className="text-muted-foreground text-sm">
+                  Object rotation
+                </span>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-foreground">
+                Animation Details
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <div className="text-muted-foreground text-sm">
+                <strong>Rotation Y:</strong> 2 rad/s (fast)
+              </div>
+              <div className="text-muted-foreground text-sm">
+                <strong>Rotation X:</strong> 0.5 rad/s (slow)
+              </div>
+              <div className="text-muted-foreground text-sm">
+                <strong>Material:</strong> Metal with roughness 0.3
+              </div>
+              <div className="text-muted-foreground text-sm">
+                <strong>Colors:</strong> Cyan → Red on hover
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-foreground">Interaction</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                <MousePointer className="w-4 h-4" />
+                <span>Hover: Change cube color</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                <RotateCcw className="w-4 h-4" />
+                <span>Auto rotation: Continuous</span>
+              </div>
+              <div className="flex items-center gap-2 text-muted-foreground text-sm">
+                <Palette className="w-4 h-4" />
+                <span>Material: Reflective metal</span>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

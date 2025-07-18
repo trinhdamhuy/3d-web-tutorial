@@ -10,7 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Download } from "lucide-react";
-import { NextLesson } from "@/app/_components/next-lesson";
 import { CodeDisplay } from "@/app/_components/code-display";
 import { FeatureListCard } from "@/app/_components/feature-list-card";
 
@@ -129,54 +128,50 @@ function Scene() {
 
 export default function MultiModels() {
   return (
-    <div className="p-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
-            <Download className="w-8 h-8" />
-            Lesson 10: Load Multiple Models
-          </h1>
-          <p className="text-muted-foreground">
-            Load and display multiple 3D models from a JSON list at predefined
-            positions
-          </p>
+    <div className="max-w-6xl mx-auto">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
+          <Download className="w-8 h-8" />
+          Lesson 10: Load Multiple Models
+        </h1>
+        <p className="text-muted-foreground">
+          Load and display multiple 3D models from a JSON list at predefined
+          positions
+        </p>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* 3D Scene */}
+        <div className="lg:col-span-2">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-foreground">
+                Multiple Models Scene
+              </CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Boxes are loaded dynamically from a JSON array
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="h-96 w-full rounded-lg overflow-hidden">
+                <Canvas camera={{ position: [6, 6, 6] }}>
+                  <Scene />
+                </Canvas>
+              </div>
+            </CardContent>
+          </Card>
+          {/* Code Display */}
+          <CodeDisplay
+            code={multiModelsCode}
+            title="Multiple Models Scene Code"
+            description="Render multiple boxes from a JSON array dynamically"
+          />
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* 3D Scene */}
-          <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground">
-                  Multiple Models Scene
-                </CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  Boxes are loaded dynamically from a JSON array
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="h-96 w-full rounded-lg overflow-hidden">
-                  <Canvas camera={{ position: [6, 6, 6] }}>
-                    <Scene />
-                  </Canvas>
-                </div>
-              </CardContent>
-            </Card>
-            {/* Code Display */}
-            <CodeDisplay
-              code={multiModelsCode}
-              title="Multiple Models Scene Code"
-              description="Render multiple boxes from a JSON array dynamically"
-            />
-          </div>
-          {/* Sidebar Cards */}
-          <div className="space-y-4">
-            <FeatureListCard title="Dynamic Content" items={dynamicContent} />
-            <FeatureListCard title="Model Properties" items={modelProperties} />
-            <FeatureListCard title="Controls" items={controls} />
-          </div>
+        {/* Sidebar Cards */}
+        <div className="space-y-4">
+          <FeatureListCard title="Dynamic Content" items={dynamicContent} />
+          <FeatureListCard title="Model Properties" items={modelProperties} />
+          <FeatureListCard title="Controls" items={controls} />
         </div>
-        {/* Next Lesson Button */}
-        <NextLesson currentLessonId="multi-models" scope="intermediate" />
       </div>
     </div>
   );

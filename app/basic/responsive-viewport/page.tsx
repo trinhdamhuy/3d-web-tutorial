@@ -16,7 +16,6 @@ import {
   Tablet,
   TabletSmartphone as Responsive,
 } from "lucide-react";
-import { NextLesson } from "@/app/_components/next-lesson";
 import { CodeDisplay } from "@/app/_components/code-display";
 import { useEffect, useState } from "react";
 
@@ -198,163 +197,152 @@ function Scene() {
 
 export default function ResponsiveViewport() {
   return (
-    <div className="p-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-6">
-          <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
-            <Responsive className="w-8 h-8" />
-            Lesson 5: Responsive Viewport
-          </h1>
-          <p className="text-muted-foreground">
-            Automatically adjust camera based on screen size
-          </p>
+    <div className="max-w-6xl mx-auto">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-foreground mb-2 flex items-center gap-2">
+          <Responsive className="w-8 h-8" />
+          Lesson 5: Responsive Viewport
+        </h1>
+        <p className="text-muted-foreground">
+          Automatically adjust camera based on screen size
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* 3D Scene */}
+        <div className="lg:col-span-2">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-foreground">
+                Responsive 3D Scene
+              </CardTitle>
+              <CardDescription className="text-muted-foreground">
+                Resize the window to see the camera automatically adjust
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="h-96 w-full rounded-lg overflow-hidden relative">
+                <Canvas>
+                  <Scene />
+                </Canvas>
+                <ViewportInfo />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Code Display */}
+          <CodeDisplay
+            code={responsiveCameraCode}
+            title="Responsive Camera Component"
+            description="Camera component that adjusts based on screen size"
+          />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* 3D Scene */}
-          <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground">
-                  Responsive 3D Scene
-                </CardTitle>
-                <CardDescription className="text-muted-foreground">
-                  Resize the window to see the camera automatically adjust
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="h-96 w-full rounded-lg overflow-hidden relative">
-                  <Canvas>
-                    <Scene />
-                  </Canvas>
-                  <ViewportInfo />
-                </div>
-              </CardContent>
-            </Card>
+        {/* Concepts */}
+        <div className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-foreground">
+                Concepts Learned
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">useThree</Badge>
+                <span className="text-muted-foreground text-sm">
+                  Get scene information
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">size</Badge>
+                <span className="text-muted-foreground text-sm">
+                  Viewport dimensions
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">viewport</Badge>
+                <span className="text-muted-foreground text-sm">
+                  Viewport coordinates
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">camera.position</Badge>
+                <span className="text-muted-foreground text-sm">
+                  Camera position
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">camera.fov</Badge>
+                <span className="text-muted-foreground text-sm">
+                  Camera field of view
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">updateProjectionMatrix</Badge>
+                <span className="text-muted-foreground text-sm">
+                  Update camera
+                </span>
+              </div>
+            </CardContent>
+          </Card>
 
-            {/* Code Display */}
-            <CodeDisplay
-              code={responsiveCameraCode}
-              title="Responsive Camera Component"
-              description="Camera component that adjusts based on screen size"
-            />
-          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-foreground">
+                Responsive Breakpoints
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex items-center gap-2">
+                <Smartphone className="w-4 h-4 text-primary" />
+                <div className="text-muted-foreground text-sm">
+                  <strong>Mobile:</strong> &lt; 768px
+                  <br />
+                  <span className="text-xs">Position: [4, 4, 4], FOV: 75°</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Tablet className="w-4 h-4 text-primary" />
+                <div className="text-muted-foreground text-sm">
+                  <strong>Tablet:</strong> 768px - 1024px
+                  <br />
+                  <span className="text-xs">Position: [5, 5, 5], FOV: 60°</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Monitor className="w-4 h-4 text-primary" />
+                <div className="text-muted-foreground text-sm">
+                  <strong>Desktop:</strong> &gt; 1024px
+                  <br />
+                  <span className="text-xs">Position: [6, 6, 6], FOV: 50°</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-          {/* Concepts */}
-          <div className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground">
-                  Concepts Learned
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">useThree</Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Get scene information
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">size</Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Viewport dimensions
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">viewport</Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Viewport coordinates
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">camera.position</Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Camera position
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">camera.fov</Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Camera field of view
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Badge variant="secondary">updateProjectionMatrix</Badge>
-                  <span className="text-muted-foreground text-sm">
-                    Update camera
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground">
-                  Responsive Breakpoints
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <Smartphone className="w-4 h-4 text-primary" />
-                  <div className="text-muted-foreground text-sm">
-                    <strong>Mobile:</strong> &lt; 768px
-                    <br />
-                    <span className="text-xs">
-                      Position: [4, 4, 4], FOV: 75°
-                    </span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Tablet className="w-4 h-4 text-primary" />
-                  <div className="text-muted-foreground text-sm">
-                    <strong>Tablet:</strong> 768px - 1024px
-                    <br />
-                    <span className="text-xs">
-                      Position: [5, 5, 5], FOV: 60°
-                    </span>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Monitor className="w-4 h-4 text-primary" />
-                  <div className="text-muted-foreground text-sm">
-                    <strong>Desktop:</strong> &gt; 1024px
-                    <br />
-                    <span className="text-xs">
-                      Position: [6, 6, 6], FOV: 50°
-                    </span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-foreground">Viewport Info</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="text-muted-foreground text-sm">
-                  <strong>Screen Size:</strong> Actual screen dimensions
-                </div>
-                <div className="text-muted-foreground text-sm">
-                  <strong>Viewport Size:</strong> 3D viewport dimensions
-                </div>
-                <div className="text-muted-foreground text-sm">
-                  <strong>Pixel Ratio:</strong> Device pixel ratio
-                </div>
-                <div className="text-muted-foreground text-sm">
-                  <strong>FOV:</strong> Field of View (viewing angle)
-                </div>
-                <div className="text-muted-foreground text-sm">
-                  <strong>Position:</strong> Camera position [x, y, z]
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-foreground">Viewport Info</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <div className="text-muted-foreground text-sm">
+                <strong>Screen Size:</strong> Actual screen dimensions
+              </div>
+              <div className="text-muted-foreground text-sm">
+                <strong>Viewport Size:</strong> 3D viewport dimensions
+              </div>
+              <div className="text-muted-foreground text-sm">
+                <strong>Pixel Ratio:</strong> Device pixel ratio
+              </div>
+              <div className="text-muted-foreground text-sm">
+                <strong>FOV:</strong> Field of View (viewing angle)
+              </div>
+              <div className="text-muted-foreground text-sm">
+                <strong>Position:</strong> Camera position [x, y, z]
+              </div>
+            </CardContent>
+          </Card>
         </div>
-
-        {/* Next Lesson Button */}
-        <NextLesson currentLessonId="responsive-viewport" scope="basic" />
       </div>
     </div>
   );
