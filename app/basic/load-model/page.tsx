@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
+import { LessonCanvas } from "@/app/_components/lesson-canvas";
 import { OrbitControls, Environment, ContactShadows } from "@react-three/drei";
 import {
   Card,
@@ -209,19 +209,17 @@ export default function LoadModel() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96 w-full rounded-lg overflow-hidden">
-                <Canvas
-                  camera={{ position: [5, 5, 5] }}
-                  shadows
-                  gl={{
-                    antialias: true,
-                    toneMapping: 2, // ACESFilmicToneMapping
-                    outputColorSpace: "srgb",
-                  }}
-                >
-                  <Scene />
-                </Canvas>
-              </div>
+              <LessonCanvas
+                camera={{ position: [5, 5, 5] }}
+                shadows
+                gl={{
+                  antialias: true,
+                  toneMapping: 2, // ACESFilmicToneMapping
+                  outputColorSpace: "srgb",
+                }}
+              >
+                <Scene />
+              </LessonCanvas>
             </CardContent>
           </Card>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import { LessonCanvas } from "@/app/_components/lesson-canvas";
 import { OrbitControls } from "@react-three/drei";
 import {
   Card,
@@ -98,7 +98,7 @@ function InteriorDesignScene() {
     { position: [1.5, 0.35, 0], color: "#ef4444" },
   ];
   return (
-    <Canvas camera={{ position: [0, 4, 6] }}>
+    <LessonCanvas camera={{ position: [0, 4, 6] }}>
       <ambientLight intensity={0.5} />
       <directionalLight position={[5, 10, 5]} intensity={1} />
       {/* Floor */}
@@ -130,7 +130,7 @@ function InteriorDesignScene() {
         />
       ))}
       <OrbitControls />
-    </Canvas>
+    </LessonCanvas>
   );
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
+import { LessonCanvas } from "@/app/_components/lesson-canvas";
 import { OrbitControls, Box, Sphere, Cylinder, Plane } from "@react-three/drei";
 import {
   Card,
@@ -155,11 +155,9 @@ export default function MultiObject() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96 w-full rounded-lg overflow-hidden">
-                <Canvas camera={{ position: [5, 5, 5] }}>
-                  <Scene />
-                </Canvas>
-              </div>
+              <LessonCanvas camera={{ position: [5, 5, 5] }}>
+                <Scene />
+              </LessonCanvas>
             </CardContent>
           </Card>
 

@@ -1,6 +1,7 @@
 "use client";
 
-import { Canvas, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { LessonCanvas } from "@/app/_components/lesson-canvas";
 import { OrbitControls, Box } from "@react-three/drei";
 import {
   Card,
@@ -190,11 +191,9 @@ export default function CameraAnimation() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96 w-full rounded-lg overflow-hidden">
-                <Canvas camera={{ position: [5, 5, 5] }} shadows>
-                  <Scene />
-                </Canvas>
-              </div>
+              <LessonCanvas camera={{ position: [5, 5, 5] }} shadows>
+                <Scene />
+              </LessonCanvas>
             </CardContent>
           </Card>
           {/* Code Display */}

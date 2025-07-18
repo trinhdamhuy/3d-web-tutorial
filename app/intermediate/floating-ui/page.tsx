@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
+import { LessonCanvas } from "@/app/_components/lesson-canvas";
 import { OrbitControls, Box, Html } from "@react-three/drei";
 import {
   Card,
@@ -152,11 +152,9 @@ export default function FloatingUI() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96 w-full rounded-lg overflow-hidden">
-                <Canvas camera={{ position: [4, 4, 4] }}>
-                  <Scene />
-                </Canvas>
-              </div>
+              <LessonCanvas camera={{ position: [4, 4, 4] }}>
+                <Scene />
+              </LessonCanvas>
             </CardContent>
           </Card>
           {/* Code Display */}

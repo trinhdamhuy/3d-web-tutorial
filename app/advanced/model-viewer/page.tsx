@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import { LessonCanvas } from "@/app/_components/lesson-canvas";
 import { OrbitControls, Sphere } from "@react-three/drei";
 import {
   Card,
@@ -65,16 +65,14 @@ function ModelViewer() {
         />
         <span className="text-xs">{light.toFixed(2)}</span>
       </div>
-      <div className="h-96 w-full rounded-lg overflow-hidden">
-        <Canvas style={{ background: bg }} camera={{ position: [3, 3, 3] }}>
-          <ambientLight intensity={0.3} />
-          <directionalLight position={[5, 10, 5]} intensity={light} />
-          <Sphere args={[1, 32, 32]}>
-            <meshStandardMaterial color="#3b82f6" />
-          </Sphere>
-          <OrbitControls />
-        </Canvas>
-      </div>
+      <LessonCanvas style={{ background: bg }} camera={{ position: [3, 3, 3] }}>
+        <ambientLight intensity={0.3} />
+        <directionalLight position={[5, 10, 5]} intensity={light} />
+        <Sphere args={[1, 32, 32]}>
+          <meshStandardMaterial color="#3b82f6" />
+        </Sphere>
+        <OrbitControls />
+      </LessonCanvas>
     </>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { Canvas, useThree } from "@react-three/fiber";
+import { useThree } from "@react-three/fiber";
+import { LessonCanvas } from "@/app/_components/lesson-canvas";
 import { OrbitControls, Box, Sphere, Cylinder } from "@react-three/drei";
 import {
   Card,
@@ -217,12 +218,10 @@ export default function ResponsiveViewport() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96 w-full rounded-lg overflow-hidden relative">
-                <Canvas>
-                  <Scene />
-                </Canvas>
+              <LessonCanvas>
+                <Scene />
                 <ViewportInfo />
-              </div>
+              </LessonCanvas>
             </CardContent>
           </Card>
 

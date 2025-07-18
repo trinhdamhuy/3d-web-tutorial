@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import { LessonCanvas } from "@/app/_components/lesson-canvas";
 import { OrbitControls, Torus, Sphere, Box } from "@react-three/drei";
 import {
   Card,
@@ -182,20 +182,18 @@ export default function ModelSelectorLesson() {
                   Torus
                 </Button>
               </div>
-              <div className="h-96 w-full rounded-lg overflow-hidden">
-                <Canvas camera={{ position: [3, 3, 3] }} shadows>
-                  <ambientLight intensity={0.5} />
-                  <directionalLight
-                    position={[5, 10, 5]}
-                    intensity={1}
-                    castShadow
-                  />
-                  <Suspense fallback={null}>
-                    <ModelDisplay model={selected} />
-                  </Suspense>
-                  <OrbitControls />
-                </Canvas>
-              </div>
+              <LessonCanvas camera={{ position: [3, 3, 3] }} shadows>
+                <ambientLight intensity={0.5} />
+                <directionalLight
+                  position={[5, 10, 5]}
+                  intensity={1}
+                  castShadow
+                />
+                <Suspense fallback={null}>
+                  <ModelDisplay model={selected} />
+                </Suspense>
+                <OrbitControls />
+              </LessonCanvas>
             </CardContent>
           </Card>
           {/* Code Display */}

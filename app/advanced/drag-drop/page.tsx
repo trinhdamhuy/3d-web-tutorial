@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import {
   Card,
@@ -14,6 +14,7 @@ import { MousePointer } from "lucide-react";
 import { CodeDisplay } from "@/app/_components/code-display";
 import { FeatureListCard } from "@/app/_components/feature-list-card";
 import * as THREE from "three";
+import { LessonCanvas } from "@/app/_components/lesson-canvas";
 
 const dragDropCode = `import { useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
@@ -59,14 +60,14 @@ export default function DragDropScene() {
 
 function DraggableBox() {
   const meshRef = useRef<THREE.Mesh>(null);
-  const { camera, gl, scene } = useThree();
+  const { camera, gl } = useThree();
   const [dragging, setDragging] = useState(false);
   const [position, setPosition] = useState<[number, number, number]>([
     0, 0.5, 0,
   ]);
 
   // Helper to convert screen to world XZ
-  function getXZFromPointer(event: any) {
+  function getXZFromPointer(event: MouseEvent) {
     const mouse = new THREE.Vector2();
     mouse.x = (event.clientX / gl.domElement.clientWidth) * 2 - 1;
     mouse.y = -(event.clientY / gl.domElement.clientHeight) * 2 + 1;
@@ -109,12 +110,12 @@ function DraggableBox() {
 
 function DragDropScene() {
   return (
-    <Canvas camera={{ position: [4, 4, 4] }} shadows>
+    <LessonCanvas camera={{ position: [4, 4, 4] }} shadows>
       <ambientLight intensity={0.5} />
       <directionalLight position={[5, 10, 5]} intensity={1} castShadow />
       <DraggableBox />
       <OrbitControls />
-    </Canvas>
+    </LessonCanvas>
   );
 }
 

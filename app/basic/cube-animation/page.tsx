@@ -1,6 +1,6 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
+import { LessonCanvas } from "@/app/_components/lesson-canvas";
 import { OrbitControls, Box } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useRef, useState } from "react";
@@ -149,11 +149,9 @@ export default function CubeAnimation() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="h-96 w-full rounded-lg overflow-hidden">
-                <Canvas camera={{ position: [3, 3, 3] }}>
-                  <Scene />
-                </Canvas>
-              </div>
+              <LessonCanvas camera={{ position: [3, 3, 3] }}>
+                <Scene />
+              </LessonCanvas>
             </CardContent>
           </Card>
 

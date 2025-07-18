@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 
@@ -81,56 +81,59 @@ const lessonOrders = [
   ],
 ];
 
-function findCurrentAndNextLesson(pathname: string) {
-  let found = false;
-  let nextLesson = null;
+function findLessonIndices(pathname: string) {
   for (let i = 0; i < lessonOrders.length; i++) {
     const order = lessonOrders[i];
     const idx = order.findIndex((lesson) => pathname.startsWith(lesson.path));
     if (idx !== -1) {
-      found = true;
-      // If not last in this order
-      if (idx < order.length - 1) {
-        nextLesson = order[idx + 1];
-      } else {
-        // If last in this order, go to first of next order (if exists)
-        if (lessonOrders[i + 1] && lessonOrders[i + 1].length > 0) {
-          nextLesson = lessonOrders[i + 1][0];
-        }
-      }
-      break;
+      return { orderIndex: i, lessonIndex: idx };
     }
   }
-  // If not found in any order, try to find the next lesson by path order
-  if (!found) {
-    for (let i = 0; i < lessonOrders.length; i++) {
-      for (let j = 0; j < lessonOrders[i].length; j++) {
-        if (pathname.startsWith(lessonOrders[i][j].path)) {
-          // fallback, should not happen, but just in case
-          if (j < lessonOrders[i].length - 1) {
-            return lessonOrders[i][j + 1];
-          } else if (lessonOrders[i + 1] && lessonOrders[i + 1].length > 0) {
-            return lessonOrders[i + 1][0];
-          }
-        }
-      }
-    }
-  }
-  return nextLesson;
+  return null;
 }
 
-export default function NextLesson({ className = "" }: { className?: string }) {
+export default function LessonNavigation({
+  className = "",
+}: {
+  className?: string;
+}) {
   const pathname = usePathname();
-  const nextLesson = findCurrentAndNextLesson(pathname);
-  if (!nextLesson) return null;
+  const indices = findLessonIndices(pathname);
+  if (!indices) return null;
+  const { orderIndex, lessonIndex } = indices;
+  const order = lessonOrders[orderIndex];
+  const prevLesson =
+    lessonIndex > 0
+      ? order[lessonIndex - 1]
+      : lessonOrders[orderIndex - 1]?.[lessonOrders[orderIndex - 1].length - 1];
+  const nextLesson =
+    lessonIndex < order.length - 1
+      ? order[lessonIndex + 1]
+      : lessonOrders[orderIndex + 1]?.[0];
   return (
-    <div className={`flex justify-center ${className}`}>
-      <Button asChild size="lg" className="gap-2">
-        <Link href={nextLesson.path}>
-          Next Lesson: {nextLesson.title}
-          <ArrowRight className="w-4 h-4" />
-        </Link>
-      </Button>
+    <div className={`flex justify-between ${className}`}>
+      {/* Previous Lesson */}
+      {prevLesson ? (
+        <Button asChild size="lg" variant="outline" className="gap-2">
+          <Link href={prevLesson.path}>
+            <ArrowLeft className="w-4 h-4" />
+            Previous Lesson: {prevLesson.title}
+          </Link>
+        </Button>
+      ) : (
+        <div />
+      )}
+      {/* Next Lesson */}
+      {nextLesson ? (
+        <Button asChild size="lg" className="gap-2">
+          <Link href={nextLesson.path}>
+            Next Lesson: {nextLesson.title}
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </Button>
+      ) : (
+        <div />
+      )}
     </div>
   );
 }
