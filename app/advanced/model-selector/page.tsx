@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 const modelSelectorCode = `import { useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Torus, Sphere, Box } from "@react-three/drei";
+import { Button } from "@/components/ui/button";
 
 function ModelDisplay({ model }) {
   switch (model) {
@@ -36,10 +37,25 @@ export default function ModelSelectorScene() {
   const [selected, setSelected] = useState("cube");
   return (
     <>
-      <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
-        <button onClick={() => setSelected("cube")}>Cube</button>
-        <button onClick={() => setSelected("sphere")}>Sphere</button>
-        <button onClick={() => setSelected("torus")}>Torus</button>
+      <div className="flex gap-2 mb-4 items-center">
+        <Button
+          variant={selected === "cube" ? "default" : "ghost"}
+          onClick={() => setSelected("cube")}
+        >
+          Cube
+        </Button>
+        <Button
+          variant={selected === "sphere" ? "default" : "ghost"}
+          onClick={() => setSelected("sphere")}
+        >
+          Sphere
+        </Button>
+        <Button
+          variant={selected === "torus" ? "default" : "ghost"}
+          onClick={() => setSelected("torus")}
+        >
+          Torus
+        </Button>
       </div>
       <Canvas camera={{ position: [3, 3, 3] }} shadows>
         <ambientLight intensity={0.5} />

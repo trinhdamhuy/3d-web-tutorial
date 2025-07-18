@@ -9,9 +9,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Box as Cube, MousePointer } from "lucide-react";
 import { CodeDisplay } from "@/app/_components/code-display";
+import { FeatureListCard } from "@/app/_components/feature-list-card";
 
 function Scene() {
   return (
@@ -65,6 +65,35 @@ export default function HelloCube() {
 }`;
 
 export default function HelloCube() {
+  const concepts = [
+    { badge: "Canvas", description: "Main container for 3D scene" },
+    { badge: "Mesh", description: "3D object (Box)" },
+    { badge: "Geometry", description: "Shape of the object" },
+    { badge: "Material", description: "Surface and color properties" },
+    { badge: "Light", description: "Ambient & Point Light" },
+    { badge: "Controls", description: "OrbitControls" },
+  ];
+  const controls = [
+    {
+      icon: <MousePointer className="w-4 h-4" />,
+      description: "Click + Drag: Rotate camera",
+    },
+    {
+      icon: <MousePointer className="w-4 h-4" />,
+      description: "Scroll: Zoom in/out",
+    },
+    {
+      icon: <MousePointer className="w-4 h-4" />,
+      description: "Right click + Drag: Pan",
+    },
+  ];
+  const codeStructure = [
+    { label: "Canvas", description: "Wraps the 3D scene" },
+    { label: "Scene", description: "Contains all 3D objects" },
+    { label: "Box", description: "Basic geometry with material" },
+    { label: "Lights", description: "Illuminate the scene" },
+    { label: "Controls", description: "User interaction" },
+  ];
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-6">
@@ -104,94 +133,9 @@ export default function HelloCube() {
 
         {/* Concepts */}
         <div className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-foreground">
-                Concepts Learned
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Canvas</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Main container for 3D scene
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Mesh</Badge>
-                <span className="text-muted-foreground text-sm">
-                  3D object (Box)
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Geometry</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Shape of the object
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Material</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Surface and color properties
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Light</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Ambient & Point Light
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Controls</Badge>
-                <span className="text-muted-foreground text-sm">
-                  OrbitControls
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-foreground">Controls</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <MousePointer className="w-4 h-4" />
-                <span>Click + Drag: Rotate camera</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <MousePointer className="w-4 h-4" />
-                <span>Scroll: Zoom in/out</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <MousePointer className="w-4 h-4" />
-                <span>Right click + Drag: Pan</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-foreground">Code Structure</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="text-muted-foreground text-sm">
-                <strong>Canvas:</strong> Wraps the 3D scene
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Scene:</strong> Contains all 3D objects
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Box:</strong> Basic geometry with material
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Lights:</strong> Illuminate the scene
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Controls:</strong> User interaction
-              </div>
-            </CardContent>
-          </Card>
+          <FeatureListCard title="Concepts Learned" items={concepts} />
+          <FeatureListCard title="Controls" items={controls} />
+          <FeatureListCard title="Code Structure" items={codeStructure} />
         </div>
       </div>
     </div>

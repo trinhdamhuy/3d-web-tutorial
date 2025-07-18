@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { LessonCanvas } from "@/app/_components/lesson-canvas";
+import { Canvas } from "@react-three/fiber";
 import { Instances, Instance, OrbitControls } from "@react-three/drei";
 import {
   Card,
@@ -36,7 +36,7 @@ function Boxes() {
 export default function PerformanceOptimizationScene() {
   const [show, setShow] = useState(true);
   return (
-    <Canvas camera={{ position: [0, 5, 10] }}>
+    <>
       <div className="flex justify-end">
         <Button variant="ghost" onClick={() => setShow((s) => !s)}>
           {show ? <Eye /> : <EyeOff />}
@@ -46,7 +46,7 @@ export default function PerformanceOptimizationScene() {
         {show && <Boxes />}
       </Suspense>
       <OrbitControls />
-    </Canvas>
+    </>
   );
 }`;
 
@@ -68,17 +68,23 @@ function Boxes() {
 function PerformanceOptimizationScene() {
   const [show, setShow] = useState(true);
   return (
-    <LessonCanvas camera={{ position: [0, 5, 10] }}>
+    <>
       <div className="flex justify-end">
         <Button variant="ghost" onClick={() => setShow((s) => !s)}>
           {show ? <Eye /> : <EyeOff />}
         </Button>
       </div>
-      <Suspense fallback={<span>Loading...</span>}>
-        {show && <Boxes />}
-      </Suspense>
-      <OrbitControls />
-    </LessonCanvas>
+      <div className="h-96 w-full rounded-lg overflow-hidden">
+        <Canvas camera={{ position: [0, 5, 10] }}>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[5, 10, 5]} intensity={1} />
+          <Suspense fallback={<span>Loading...</span>}>
+            {show && <Boxes />}
+          </Suspense>
+          <OrbitControls />
+        </Canvas>
+      </div>
+    </>
   );
 }
 

@@ -1,8 +1,8 @@
 "use client";
 
-import { LessonCanvas } from "@/app/_components/lesson-canvas";
 import { OrbitControls, Box } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
+import { LessonCanvas } from "@/app/_components/lesson-canvas";
 import { useRef, useState } from "react";
 import {
   Card,
@@ -11,10 +11,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { RotateCcw, MousePointer, Palette } from "lucide-react";
 import { CodeDisplay } from "@/app/_components/code-display";
 import { Mesh } from "three";
+import { FeatureListCard } from "@/app/_components/feature-list-card";
 
 function AnimatedCube() {
   const meshRef = useRef<Mesh>(null);
@@ -125,6 +125,67 @@ function Scene() {
 }
 
 export default function CubeAnimation() {
+  // Concepts array for FeatureListCard
+  const concepts = [
+    {
+      badge: "useRef",
+      description: "Reference to mesh object",
+    },
+    {
+      badge: "useFrame",
+      description: "Animation loop hook",
+    },
+    {
+      badge: "useState",
+      description: "Manage hover state",
+    },
+    {
+      badge: "onPointerOver",
+      description: "Mouse enter event",
+    },
+    {
+      badge: "onPointerOut",
+      description: "Mouse leave event",
+    },
+    {
+      badge: "rotation",
+      description: "Object rotation",
+    },
+  ];
+
+  const animationDetails = [
+    {
+      label: "Rotation Y",
+      description: "2 rad/s (fast)",
+    },
+    {
+      label: "Rotation X",
+      description: "0.5 rad/s (slow)",
+    },
+    {
+      label: "Material",
+      description: "Metal with roughness 0.3",
+    },
+    {
+      label: "Colors",
+      description: "Cyan → Red on hover",
+    },
+  ];
+
+  const interactions = [
+    {
+      icon: <MousePointer className="w-4 h-4" />,
+      description: "Hover: Change cube color",
+    },
+    {
+      icon: <RotateCcw className="w-4 h-4" />,
+      description: "Auto rotation: Continuous",
+    },
+    {
+      icon: <Palette className="w-4 h-4" />,
+      description: "Material: Reflective metal",
+    },
+  ];
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-6">
@@ -165,93 +226,9 @@ export default function CubeAnimation() {
 
         {/* Concepts */}
         <div className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-foreground">
-                Concepts Learned
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">useRef</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Reference to mesh object
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">useFrame</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Animation loop hook
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">useState</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Manage hover state
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">onPointerOver</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Mouse enter event
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">onPointerOut</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Mouse leave event
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">rotation</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Object rotation
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-foreground">
-                Animation Details
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="text-muted-foreground text-sm">
-                <strong>Rotation Y:</strong> 2 rad/s (fast)
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Rotation X:</strong> 0.5 rad/s (slow)
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Material:</strong> Metal with roughness 0.3
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Colors:</strong> Cyan → Red on hover
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-foreground">Interaction</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <MousePointer className="w-4 h-4" />
-                <span>Hover: Change cube color</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <RotateCcw className="w-4 h-4" />
-                <span>Auto rotation: Continuous</span>
-              </div>
-              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                <Palette className="w-4 h-4" />
-                <span>Material: Reflective metal</span>
-              </div>
-            </CardContent>
-          </Card>
+          <FeatureListCard title="Concepts Learned" items={concepts} />
+          <FeatureListCard title="Animation Details" items={animationDetails} />
+          <FeatureListCard title="Interaction" items={interactions} />
         </div>
       </div>
     </div>

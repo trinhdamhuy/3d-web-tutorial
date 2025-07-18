@@ -9,10 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Download } from "lucide-react";
 import { CodeDisplay } from "@/app/_components/code-display";
 import { Suspense } from "react";
+import { FeatureListCard } from "@/app/_components/feature-list-card";
 
 // Component to load GLB model
 function Model() {
@@ -186,6 +186,27 @@ function Scene() {
 }
 
 export default function LoadModel() {
+  const concepts = [
+    { badge: "useGLTF", description: "Load GLB models" },
+    { badge: "Environment", description: "Environmental lighting" },
+    { badge: "Shadows", description: "Realistic shadows" },
+    { badge: "ContactShadows", description: "Contact shadows" },
+    { badge: "Suspense", description: "Loading state" },
+    { badge: "ToneMapping", description: "Color processing" },
+  ];
+  const lighting = [
+    { label: "Environment", description: "Sunset preset" },
+    { label: "Directional Light", description: "Shadow casting" },
+    { label: "Point Lights", description: "Colored lighting" },
+    { label: "Ambient Light", description: "Base illumination" },
+    { label: "Shadow Maps", description: "2048x2048 resolution" },
+  ];
+  const materialProps = [
+    { label: "Metalness", description: "0.6-0.8 (metallic)" },
+    { label: "Roughness", description: "0.2-0.3 (smooth)" },
+    { label: "Cast Shadow", description: "Create shadows" },
+    { label: "Receive Shadow", description: "Receive shadows" },
+  ];
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-6">
@@ -233,98 +254,9 @@ export default function LoadModel() {
 
         {/* Concepts */}
         <div className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-foreground">
-                Concepts Learned
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">useGLTF</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Load GLB models
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Environment</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Environmental lighting
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Shadows</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Realistic shadows
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">ContactShadows</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Contact shadows
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">Suspense</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Loading state
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Badge variant="secondary">ToneMapping</Badge>
-                <span className="text-muted-foreground text-sm">
-                  Color processing
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-foreground">
-                Advanced Lighting
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="text-muted-foreground text-sm">
-                <strong>Environment:</strong> Sunset preset
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Directional Light:</strong> Shadow casting
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Point Lights:</strong> Colored lighting
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Ambient Light:</strong> Base illumination
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Shadow Maps:</strong> 2048x2048 resolution
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-foreground">
-                Material Properties
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="text-muted-foreground text-sm">
-                <strong>Metalness:</strong> 0.6-0.8 (metallic)
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Roughness:</strong> 0.2-0.3 (smooth)
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Cast Shadow:</strong> Create shadows
-              </div>
-              <div className="text-muted-foreground text-sm">
-                <strong>Receive Shadow:</strong> Receive shadows
-              </div>
-            </CardContent>
-          </Card>
+          <FeatureListCard title="Concepts Learned" items={concepts} />
+          <FeatureListCard title="Advanced Lighting" items={lighting} />
+          <FeatureListCard title="Material Properties" items={materialProps} />
         </div>
       </div>
     </div>

@@ -15,78 +15,60 @@ import { CodeDisplay } from "@/app/_components/code-display";
 import { FeatureListCard } from "@/app/_components/feature-list-card";
 import * as THREE from "three";
 import { LessonCanvas } from "@/app/_components/lesson-canvas";
+import { Plane } from "@react-three/drei";
 
 const dragDropCode = `import { useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
+import { MousePointer } from "lucide-react";
+import { CodeDisplay } from "@/app/_components/code-display";
+import { FeatureListCard } from "@/app/_components/feature-list-card";
+import * as THREE from "three";
+import { Plane } from "@react-three/drei";
 
-function DraggableBox() {
-  const meshRef = useRef();
-  const { camera, gl, scene } = useThree();
-  const [dragging, setDragging] = useState(false);
-  const [position, setPosition] = useState([0, 0.5, 0]);
-
-  useFrame(() => {
-    if (dragging && meshRef.current) {
-      // Raycast to mouse position
-      // ... (see full code for details)
-    }
-  });
-
-  return (
-    <mesh
-      ref={meshRef}
-      position={position}
-      onPointerDown={() => setDragging(true)}
-      onPointerUp={() => setDragging(false)}
-      castShadow
-    >
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="#3b82f6" />
-    </mesh>
-  );
-}
-
-export default function DragDropScene() {
-  return (
-    <Canvas camera={{ position: [4, 4, 4] }} shadows>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 10, 5]} intensity={1} castShadow />
-      <DraggableBox />
-      <OrbitControls />
-    </Canvas>
-  );
-}`;
-
-function DraggableBox() {
+function DraggableBox({
+  dragging,
+  setDragging,
+}: {
+  dragging: boolean;
+  setDragging: (v: boolean) => void;
+}) {
   const meshRef = useRef<THREE.Mesh>(null);
   const { camera, gl } = useThree();
-  const [dragging, setDragging] = useState(false);
+  const boxHeight = 1;
+  const groundY = -1;
+  const restY = groundY + boxHeight / 2; // y = -0.5
+  const dragY = 2;
   const [position, setPosition] = useState<[number, number, number]>([
-    0, 0.5, 0,
+    0,
+    restY,
+    0,
   ]);
 
-  // Helper to convert screen to world XZ
-  function getXZFromPointer(event: MouseEvent) {
-    const mouse = new THREE.Vector2();
-    mouse.x = (event.clientX / gl.domElement.clientWidth) * 2 - 1;
-    mouse.y = -(event.clientY / gl.domElement.clientHeight) * 2 + 1;
-    const raycaster = new THREE.Raycaster();
-    raycaster.setFromCamera(mouse, camera);
-    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -0.5);
-    const intersection = new THREE.Vector3();
-    raycaster.ray.intersectPlane(plane, intersection);
-    return [intersection.x, 0.5, intersection.z];
-  }
-
-  useFrame(() => {
-    if (dragging && meshRef.current) {
-      // Use last pointer event
-      if ((window as any)._lastPointerEvent) {
-        setPosition(getXZFromPointer((window as any)._lastPointerEvent));
-      }
+  // Animate Y to restY when mouse is released
+  useFrame((_, delta) => {
+    if (!dragging && position[1] > restY) {
+      setPosition(([x, y, z]) => {
+        const newY = Math.max(restY, y - delta * 6); // falling speed
+        return [x, newY, z];
+      });
     }
   });
+
+  function getXZFromPointer(
+    event: MouseEvent | PointerEvent
+  ): [number, number, number] {
+    const mouse = new THREE.Vector2();
+    const rect = gl.domElement.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, camera);
+    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -restY);
+    const intersection = new THREE.Vector3();
+    raycaster.ray.intersectPlane(plane, intersection);
+    return [intersection.x, dragY, intersection.z]; // When dragging, Y = dragY (raise box up)
+  }
 
   return (
     <mesh
@@ -94,11 +76,26 @@ function DraggableBox() {
       position={position}
       onPointerDown={(e) => {
         setDragging(true);
-        (window as any)._lastPointerEvent = e;
+        // @ts-expect-error setPointerCapture is not always on target in TS types
+        e.target.setPointerCapture(e.pointerId);
+        // When starting drag, lift the box up
+        setPosition(([x, , z]) => [x, dragY, z]);
       }}
-      onPointerUp={() => setDragging(false)}
       onPointerMove={(e) => {
-        if (dragging) (window as any)._lastPointerEvent = e;
+        if (dragging) {
+          const [x, , z] = getXZFromPointer(e.nativeEvent);
+          setPosition([x, dragY, z]);
+        }
+      }}
+      onPointerUp={(e) => {
+        setDragging(false);
+        // @ts-expect-error releasePointerCapture is not always on target in TS types
+        e.target.releasePointerCapture(e.pointerId);
+      }}
+      onPointerLeave={(e) => {
+        setDragging(false);
+        // @ts-expect-error releasePointerCapture is not always on target in TS types
+        e.target.releasePointerCapture(e.pointerId);
       }}
       castShadow
     >
@@ -109,12 +106,127 @@ function DraggableBox() {
 }
 
 function DragDropScene() {
+  const [dragging, setDragging] = useState(false);
   return (
     <LessonCanvas camera={{ position: [4, 4, 4] }} shadows>
       <ambientLight intensity={0.5} />
-      <directionalLight position={[5, 10, 5]} intensity={1} castShadow />
-      <DraggableBox />
-      <OrbitControls />
+      <directionalLight position={[0, 10, 0]} intensity={1} castShadow />
+      <DraggableBox dragging={dragging} setDragging={setDragging} />
+      <OrbitControls enabled={!dragging} />
+      <Plane
+        args={[10, 10]}
+        position={[0, -1, 0]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        receiveShadow
+      >
+        <meshStandardMaterial color="#e5e7eb" />
+      </Plane>
+    </LessonCanvas>
+  );
+}`;
+
+// Add global type for window._lastPointerEvent
+declare global {
+  interface Window {
+    _lastPointerEvent?: MouseEvent;
+  }
+}
+
+function DraggableBox({
+  dragging,
+  setDragging,
+}: {
+  dragging: boolean;
+  setDragging: (v: boolean) => void;
+}) {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const { camera, gl } = useThree();
+  const boxHeight = 1;
+  const groundY = -1;
+  const restY = groundY + boxHeight / 2; // y = -0.5
+  const dragY = 2;
+  const [position, setPosition] = useState<[number, number, number]>([
+    0,
+    restY,
+    0,
+  ]);
+
+  // Animate Y to restY when mouse is released
+  useFrame((_, delta) => {
+    if (!dragging && position[1] > restY) {
+      setPosition(([x, y, z]) => {
+        const newY = Math.max(restY, y - delta * 6); // falling speed
+        return [x, newY, z];
+      });
+    }
+  });
+
+  function getXZFromPointer(
+    event: MouseEvent | PointerEvent
+  ): [number, number, number] {
+    const mouse = new THREE.Vector2();
+    const rect = gl.domElement.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    const raycaster = new THREE.Raycaster();
+    raycaster.setFromCamera(mouse, camera);
+    const plane = new THREE.Plane(new THREE.Vector3(0, 1, 0), -restY);
+    const intersection = new THREE.Vector3();
+    raycaster.ray.intersectPlane(plane, intersection);
+    return [intersection.x, dragY, intersection.z]; // When dragging, Y = dragY (raise box up)
+  }
+
+  return (
+    <mesh
+      ref={meshRef}
+      position={position}
+      onPointerDown={(e) => {
+        setDragging(true);
+        // @ts-expect-error setPointerCapture is not always on target in TS types
+        e.target.setPointerCapture(e.pointerId);
+        // When starting drag, lift the box up
+        setPosition(([x, , z]) => [x, dragY, z]);
+      }}
+      onPointerMove={(e) => {
+        if (dragging) {
+          const [x, , z] = getXZFromPointer(e.nativeEvent);
+          setPosition([x, dragY, z]);
+        }
+      }}
+      onPointerUp={(e) => {
+        setDragging(false);
+        // @ts-expect-error releasePointerCapture is not always on target in TS types
+        e.target.releasePointerCapture(e.pointerId);
+      }}
+      onPointerLeave={(e) => {
+        setDragging(false);
+        // @ts-expect-error releasePointerCapture is not always on target in TS types
+        e.target.releasePointerCapture(e.pointerId);
+      }}
+      castShadow
+    >
+      <boxGeometry args={[1, 1, 1]} />
+      <meshStandardMaterial color="#3b82f6" />
+    </mesh>
+  );
+}
+
+function DragDropScene() {
+  const [dragging, setDragging] = useState(false);
+  return (
+    <LessonCanvas camera={{ position: [4, 4, 4] }} shadows>
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[0, 10, 0]} intensity={1} castShadow />
+      <DraggableBox dragging={dragging} setDragging={setDragging} />
+      <OrbitControls enabled={!dragging} />
+      <Plane
+        args={[10, 10]}
+        position={[0, -1, 0]}
+        rotation={[-Math.PI / 2, 0, 0]}
+        receiveShadow
+      >
+        <meshStandardMaterial color="#e5e7eb" />
+      </Plane>
     </LessonCanvas>
   );
 }
