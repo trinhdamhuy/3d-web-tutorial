@@ -1,7 +1,13 @@
 "use client";
 
 import { useState, Suspense } from "react";
-import { Instances, Instance, OrbitControls, Plane } from "@react-three/drei";
+import {
+  Instances,
+  OrbitControls,
+  Plane,
+  PerformanceMonitor,
+  Box,
+} from "@react-three/drei";
 import {
   Card,
   CardContent,
@@ -14,90 +20,70 @@ import { CodeDisplay } from "@/app/_components/code-display";
 import { FeatureListCard } from "@/app/_components/feature-list-card";
 import { LessonCanvas } from "@/app/_components/lesson-canvas";
 import { Badge } from "@/components/ui/badge";
-import React from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { CullFaceBack, PCFSoftShadowMap } from "three";
 
 const perfOptCode = `import { useState, Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Instances, Instance, OrbitControls } from "@react-three/drei";
-import { Button } from "@/components/ui/button";
-import { Eye, EyeOff } from "lucide-react";
-
-function Boxes() {
-  return (
-    <Instances limit={100}>
-      <boxGeometry args={[0.3, 0.3, 0.3]} />
-      <meshStandardMaterial color="#3b82f6" />
-      {[...Array(100)].map((_, i) => (
-        <Instance key={i} position={[i % 10 - 5, 0, Math.floor(i / 10) - 5]} />
-      ))}
-    </Instances>
-  );
-}
-
-export default function PerformanceOptimizationScene() {
-  const [show, setShow] = useState(true);
-  return (
-    <>
-      <div className="flex justify-end">
-        <Button variant="ghost" onClick={() => setShow((s) => !s)}>
-          {show ? <Eye /> : <EyeOff />}
-        </Button>
-      </div>
-      <Suspense fallback={<span>Loading...</span>}>
-        {show && <Boxes />}
-      </Suspense>
-      <OrbitControls />
-    </>
-  );
-}`;
-
-// Custom hook đếm FPS
-function useFps() {
-  const [fps, setFps] = useState(0);
-  const frame = React.useRef(0);
-  const last = React.useRef(performance.now());
-  React.useEffect(() => {
-    let mounted = true;
-    function loop() {
-      const now = performance.now();
-      frame.current++;
-      if (now - last.current >= 1000) {
-        if (mounted) setFps(frame.current);
-        frame.current = 0;
-        last.current = now;
-      }
-      requestAnimationFrame(loop);
-    }
-    loop();
-    return () => {
-      mounted = false;
-    };
-  }, []);
-  return fps;
-}
+import {
+  Instances,
+  OrbitControls,
+  Plane,
+  PerformanceMonitor,
+  Box,
+} from "@react-three/drei";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { CullFaceBack, PCFSoftShadowMap } from "three";
 
 function PerformanceOptimizationScene() {
-  const fps = useFps();
+  const [fps, setFps] = useState(0);
   const [showShadow, setShowShadow] = useState(true);
   const [showStaggeredCubes, setShowStaggeredCubes] = useState(false);
   const planeSize = 12;
-  const boxSize = 0.3;
+  const boxSize = 0.1;
   const gap = 0.05;
   const grid = Math.floor(planeSize / (boxSize + gap));
   const count = grid * grid;
+  const shadowArea = planeSize * 2;
   return (
     <div className="relative">
-      <LessonCanvas camera={{ position: [0, 8, 18] }} shadows={showShadow}>
-        <ambientLight intensity={0.5} />
+      <Canvas
+        camera={{ position: [0, 8, 15], fov: 60 }}
+        shadows={showShadow}
+        gl={{
+          antialias: true,
+          shadowMap: {
+            enabled: showShadow,
+            type: PCFSoftShadowMap,
+            autoUpdate: true,
+            needsUpdate: true,
+            render: () => {},
+            cullFace: CullFaceBack,
+          },
+        }}
+        dpr={1}
+      >
+        <ambientLight intensity={1} />
         <directionalLight
-          position={[0, 100, 0]}
+          position={[10, 10, 0]}
           intensity={1}
           castShadow={showShadow}
-          shadow-camera-far={100}
           shadow-mapSize-width={1024}
           shadow-mapSize-height={1024}
+          shadow-camera-left={-shadowArea / 2}
+          shadow-camera-right={shadowArea / 2}
+          shadow-camera-top={shadowArea / 2}
+          shadow-camera-bottom={-shadowArea / 2}
+          shadow-bias={-0.0005}
+        />
+        <hemisphereLight intensity={0.3} />
+        <PerformanceMonitor
+          onChange={({ fps }) => {
+            setFps(fps);
+          }}
         />
         <Plane
           args={[planeSize, planeSize]}
@@ -105,7 +91,7 @@ function PerformanceOptimizationScene() {
           rotation={[-Math.PI / 2, 0, 0]}
           receiveShadow={showShadow}
         >
-          <meshStandardMaterial color="#e5e7eb" />
+          <meshStandardMaterial color="gray" />
         </Plane>
         <Suspense fallback={<span>Loading...</span>}>
           <Instances
@@ -114,7 +100,7 @@ function PerformanceOptimizationScene() {
             receiveShadow={showShadow}
           >
             <boxGeometry args={[boxSize, boxSize, boxSize]} />
-            <meshStandardMaterial color="#3b82f6" />
+            <meshStandardMaterial color="red" />
             {Array.from({ length: count }).map((_, i) => {
               const row = Math.floor(i / grid);
               const col = i % grid;
@@ -128,12 +114,131 @@ function PerformanceOptimizationScene() {
               const x = -planeSize / 2 + boxSize / 2 + col * (boxSize + gap);
               const z = -planeSize / 2 + boxSize / 2 + row * (boxSize + gap);
               return (
-                <Instance
+                <Box
                   key={i}
-                  position={[x, boxSize / 2, z]}
+                  position={[x, 0, z]}
                   castShadow={showShadow}
                   receiveShadow={showShadow}
-                />
+                  args={[boxSize, boxSize, boxSize]}
+                >
+                  <meshStandardMaterial color="red" />
+                </Box>
+              );
+            })}
+          </Instances>
+        </Suspense>
+        <OrbitControls />
+      </Canvas>
+      <Badge className="absolute right-4 top-4 z-10 select-none">
+        {fps} FPS
+      </Badge>
+      <div className="flex gap-4 absolute bottom-4 left-4 z-10">
+        <Label className="flex items-center gap-2 cursor-pointer">
+          <Checkbox
+            checked={showShadow}
+            onCheckedChange={(v) => setShowShadow(!!v)}
+            id="shadow"
+          />
+          <span className="select-none">Show shadow</span>
+        </Label>
+        <Label className="flex items-center gap-2 cursor-pointer">
+          <Checkbox
+            checked={showStaggeredCubes}
+            onCheckedChange={(v) => setShowStaggeredCubes(!!v)}
+            id="staggered-cubes"
+          />
+          <span className="select-none">Show staggered cubes</span>
+        </Label>
+      </div>
+    </div>
+  );
+}`;
+
+function PerformanceOptimizationScene() {
+  const [fps, setFps] = useState(0);
+  const [showShadow, setShowShadow] = useState(true);
+  const [showStaggeredCubes, setShowStaggeredCubes] = useState(false);
+  const planeSize = 12;
+  const boxSize = 0.1;
+  const gap = 0.05;
+  const grid = Math.floor(planeSize / (boxSize + gap));
+  const count = grid * grid;
+  const shadowArea = planeSize * 2;
+  return (
+    <div className="relative">
+      <LessonCanvas
+        camera={{ position: [0, 8, 15], fov: 60 }}
+        shadows={showShadow}
+        gl={{
+          antialias: true,
+          shadowMap: {
+            enabled: showShadow,
+            type: PCFSoftShadowMap,
+            autoUpdate: true,
+            needsUpdate: true,
+            render: () => {},
+            cullFace: CullFaceBack,
+          },
+        }}
+        dpr={1}
+      >
+        <ambientLight intensity={1} />
+        <directionalLight
+          position={[10, 10, 0]}
+          intensity={1}
+          castShadow={showShadow}
+          shadow-mapSize-width={1024}
+          shadow-mapSize-height={1024}
+          shadow-camera-left={-shadowArea / 2}
+          shadow-camera-right={shadowArea / 2}
+          shadow-camera-top={shadowArea / 2}
+          shadow-camera-bottom={-shadowArea / 2}
+          shadow-bias={-0.0005}
+        />
+        <hemisphereLight intensity={0.3} />
+        <PerformanceMonitor
+          onChange={({ fps }) => {
+            setFps(fps);
+          }}
+        />
+        <Plane
+          args={[planeSize, planeSize]}
+          position={[0, -0.5, 0]}
+          rotation={[-Math.PI / 2, 0, 0]}
+          receiveShadow={showShadow}
+        >
+          <meshStandardMaterial color="gray" />
+        </Plane>
+        <Suspense fallback={<span>Loading...</span>}>
+          <Instances
+            limit={count}
+            castShadow={showShadow}
+            receiveShadow={showShadow}
+          >
+            <boxGeometry args={[boxSize, boxSize, boxSize]} />
+            <meshStandardMaterial color="red" />
+            {Array.from({ length: count }).map((_, i) => {
+              const row = Math.floor(i / grid);
+              const col = i % grid;
+              if (
+                showStaggeredCubes &&
+                ((row % 2 === 0 && col % 2 === 1) ||
+                  (row % 2 === 1 && col % 2 === 0))
+              ) {
+                return null;
+              }
+              const x = -planeSize / 2 + boxSize / 2 + col * (boxSize + gap);
+              const z = -planeSize / 2 + boxSize / 2 + row * (boxSize + gap);
+              return (
+                <Box
+                  key={i}
+                  position={[x, 0, z]}
+                  castShadow={showShadow}
+                  receiveShadow={showShadow}
+                  args={[boxSize, boxSize, boxSize]}
+                >
+                  <meshStandardMaterial color="red" />
+                </Box>
               );
             })}
           </Instances>
