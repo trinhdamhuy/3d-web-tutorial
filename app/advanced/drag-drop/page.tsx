@@ -142,9 +142,9 @@ function DraggableBox({
   const meshRef = useRef<THREE.Mesh>(null);
   const { camera, gl } = useThree();
   const boxHeight = 1;
-  const groundY = -1;
+  const groundY = 0;
   const restY = groundY + boxHeight / 2; // y = -0.5
-  const dragY = 2;
+  const dragY = 1;
   const [position, setPosition] = useState<[number, number, number]>([
     0,
     restY,
@@ -221,7 +221,7 @@ function DragDropScene() {
       <OrbitControls enabled={!dragging} />
       <Plane
         args={[10, 10]}
-        position={[0, -1, 0]}
+        position={[0, 0, 0]}
         rotation={[-Math.PI / 2, 0, 0]}
         receiveShadow
       >
