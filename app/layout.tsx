@@ -6,6 +6,7 @@ import { AutoBreadcrumb } from "./_components/auto-breadcrumb";
 import { ThemeProvider } from "@/components/theme-provider";
 import NextTopLoader from "nextjs-toploader";
 import LessonNavigation from "@/app/_components/lesson-navigation";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -53,6 +54,7 @@ export default function RootLayout({
             </div>
           </main>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
