@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geist.variable} ${geistMono.variable} antialiased`}>
-        <NextTopLoader />
+        <NextTopLoader showSpinner={false} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
